@@ -1,8 +1,12 @@
 <?php
 	foreach($people as $person) {
-		echo $person['fName'] . "<br>";
-		echo $person['lName'] . "<br>";
-		echo $person['age'] . "<br>";
+		echo "First name: " . $person['fName'] . "<br>";
+		echo "Last name: " . $person['lName'] . "<br>";
+		echo "Age: " . $person['age'] . "<br>";
 		echo "<br>";
 	}
 ?>
+
+<form action="index.php" method="GET">
+	<input type="submit" name="action" value="Add">
+</form>
