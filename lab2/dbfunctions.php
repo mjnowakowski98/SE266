@@ -9,8 +9,24 @@
         return $results[0];
     }
 
-    function addCorp() {
-        
+    function addCorp($corpName, $incDt, $email, $zip, $owner, $phone) {
+        global $db;
+        $sql = "INSERT INTO corps (corp, incorp_dt, email, zipcode, owner, phone) VALUES (:corp, :incDt, :email, :zipcode, :owner, :phone)";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':corp', $corpName);
+        $stmt->bindParam(':incDt', $incDt);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':zipcode', $zip);
+        $stmt->bindParam(':owner', $owner);
+        $stmt->bindParam(':phone', $phone);
+        $stmt->execute();
+
+        $sql = "SELECT id FROM corps WHERE corp = :corpName;";
+        $stmt->prepare($sql);
+        $stmt->bindParam(':corpName');
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETHC_ASSOC);
+        return $results[0];
     }
 
     function getRows() {

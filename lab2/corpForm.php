@@ -1,67 +1,10 @@
-<?php
-    $doc = new DOMDocument(); // Get existing DOM
-
-    // Form header
-    $formHead = $doc->createElement("h2");
-    $formHead->appendChild($doc->createTextNode("Create Record"));
-    $doc->appendChild($formHead);
-
-    // Update form
-    $updateForm = $doc->createElement("form");
-    $updateForm->setAttribute("action", "index.php");
-    $updateForm->setAttribute("method", "POST");
-
-    // Name field
-    $lblName = $doc->createElement("label");
-    $lblName->appendChild($doc->createTextNode("Corp Name: "));
-    $lblName->setAttribute("for", "corpName");
-    $nameBox = $doc->createElement("input");
-    $nameBox->setAttribute("type", "text");
-    $nameBox->setAttribute("name", "corpName");
-    $updateForm->appendChild($lblName);
-    $updateForm->appendChild($nameBox);
-
-    // Inc date
-    $lblIncDt = $doc->createElement("label");
-    $lblIncDt->setAttribute("for", "incDt");
-    $lblIncDt->appendChild($doc->createTextNode("Incorporated date: "));
-    $incDt = $doc->createElement("input");
-    $incDt->setAttribute("type", "text");
-    $incDt->setAttribute("name", "incDt");
-    $updateForm->appendChild($lblIncDt);
-    $updateForm->appendChild($incDt);
-
-    // Email
-    $lblEmail = $doc->createElement("label");
-    $lblEmail->setAttribute("for", "email");
-    $lblEmail->appendChild($doc->createtextNode("Email: "));
-    $email = $doc->createElement("input");
-    $email->setAttribute("type", "text");
-    $email->setAttribute("name", "email");
-    $updateForm->appendChild($lblEmail);
-    $updateForm->appendChild($email);
-
-    // Zip
-    $lblZip = $doc->createElement("label");
-
-    // Submit button
-    $btnAdd = $doc->createElement("input");
-    $btnAdd->setAttribute("type", "submit");
-    $btnAdd->setAttribute("name", "action");
-    $btnAdd->setAttribute("value", "Add");
-    $updateForm->appendChild($btnAdd);
-
-    // Set label classes
-    foreach($updateForm->getElementsByTagName("label") as $node) {
-        $node->setAttribute("class", "corpInputLbl");
-    }
-
-    // Set input classes
-    foreach($updateForm->getElementsByTagName("input") as $node) {
-        if($node !== $btnAdd) $node->setAttribute("class", "corpInput");
-    }
-
-    $doc->appendChild($updateForm);
-
-    echo $doc->saveHTML(); // Write to DOM
-?>
+<h2>Create Record</h2>
+<form action="index.php" method="POST">
+    <label class="corpInputLbl">Corp name: <input class="corpInput" type="text" name="corpName"></label>
+    <label class="corpInputLbl">Incorporated date: <input class="corpInput" type="text" name="incDt"></label>
+    <label class="corpinputLbl">Email: <input class="corpInput" type="text" name="email"></label>
+    <label class="corpInputLbl">Zip code: <input class="corpInput" type="text" name="zipcode"></label>
+    <label class="corpInputLbl">Owner: <input class="corpInput" type="text" name="owner"></label>
+    <label class="corpInputLbl">Phone: <input class="corpInput" type="text" name="phone"></label>
+    <input type="submit" name="action" value="Add">
+</form>

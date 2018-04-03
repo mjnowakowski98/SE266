@@ -30,7 +30,14 @@
                         include_once("corpForm.php");
                         break;
                     case "Add":
-
+                        $corpName = $_REQUEST['corpName'];
+                        $incDt = $_REQUEST['incDt'];
+                        $email = $_REQUEST['email'];
+                        $zip = $_REQUEST['zipcode'];
+                        $owner = $_REQUEST['owner'];
+                        $phone = $_REQUEST['phone'];
+                        $newCorp = addCorp($corpName, $incDt, $email, $zip, $owner, $phone);
+                        include_once("feedback.php");
                         break;
                }
             } else {
