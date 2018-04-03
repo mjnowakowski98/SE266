@@ -1,15 +1,33 @@
 .corpList {
 	font-size:14pt;
+	width:50%;
+	margin:0;
+	display:inline-block;
 }
 
 .corpListForm {
 	display:inline-block;
-	margin-left:10px;
+}
+
+.corpListBtn {
+	margin-right:5px;
 }
 
 .corpOut {
 	font-size:14pt;
 	margin:0;
+}
+
+.corpInputLbl {
+	width:250px;
+	display:block;
+	margin-bottom:2px;
+}
+
+.corpInput {
+	width:250px;
+	margin-bottom:10px;
+	display:block;
 }
 
 .infoText {

@@ -4,7 +4,7 @@
 -->
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>Lab 2</title>
@@ -14,32 +14,29 @@
         <header>
             <h1>Corporations App</h1>
         </header>
-
+        <hr>
         <?php
            require_once("dbcontroller.php");
            require_once("dbfunctions.php");
-           if($_REQUEST) {
+           if(array_key_exists('action', $_REQUEST)) {
                $action = $_REQUEST['action'];
-               $corpId = $_REQUEST['corpId'];
+               if(array_key_exists('corpId', $_REQUEST) )$corpId = $_REQUEST['corpId'];
                switch($action) {
                     case "Read":
-                        $corp = showCorp($corpId);
-                        include_once("corporateInfo.php");
+                        $corp = getCorp($corpId);
+                        include_once("showCorp.php");
                         break;
-                    case "Update":
-                        break;
-                    case "Save":
-                        break;
-                    case "Delete":
+                    case "Create":
+                        include_once("corpForm.php");
                         break;
                     case "Add":
+
                         break;
                }
             } else {
                 $corporations = getRows();
                 include_once("corporations.php");
             }
-
         ?>
     </body>
 </html>
