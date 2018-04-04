@@ -9,11 +9,7 @@
 	display:inline-block;
 }
 
-.corpListBtn {
-	margin-right:5px;
-}
-
-.corpOut {
+#corpOut {
 	font-size:14pt;
 	margin:0;
 }

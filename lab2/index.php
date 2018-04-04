@@ -36,8 +36,9 @@
                         $zip = $_REQUEST['zipcode'];
                         $owner = $_REQUEST['owner'];
                         $phone = $_REQUEST['phone'];
-                        $newCorp = addCorp($corpName, $incDt, $email, $zip, $owner, $phone);
-                        include_once("feedback.php");
+                        $count = addCorp($corpName, $incDt, $email, $zip, $owner, $phone);
+                        var_dump($count);
+                        //include_once("feedback.php");
                         break;
                }
             } else {

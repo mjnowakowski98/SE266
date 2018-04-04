@@ -19,14 +19,7 @@
         $stmt->bindParam(':zipcode', $zip);
         $stmt->bindParam(':owner', $owner);
         $stmt->bindParam(':phone', $phone);
-        $stmt->execute();
-
-        $sql = "SELECT id FROM corps WHERE corp = :corpName;";
-        $stmt->prepare($sql);
-        $stmt->bindParam(':corpName');
-        $stmt->execute();
-        $results = $stmt->fetchAll(PDO::FETHC_ASSOC);
-        return $results[0];
+        return $db->exec($stmt->queryString);
     }
 
     function getRows() {
