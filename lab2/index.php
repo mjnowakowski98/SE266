@@ -37,7 +37,8 @@
                         $owner = $_REQUEST['owner'];
                         $phone = $_REQUEST['phone'];
                         $count = addCorp($corpName, $incDt, $email, $zip, $owner, $phone);
-                        var_dump($count);
+                        echo "$count rows affected";
+                        include_once("corpForm.php");
                         break;
                }
             } else {

@@ -19,7 +19,8 @@
         $stmt->bindParam(':zipcode', $zip);
         $stmt->bindParam(':owner', $owner);
         $stmt->bindParam(':phone', $phone);
-        return $db->exec($stmt->queryString);
+        $stmt->execute();
+        return $stmt->rowCount();
     }
 
     function getRows() {
