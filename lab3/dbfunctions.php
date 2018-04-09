@@ -14,7 +14,7 @@
     function updateCorp($corpId) {
         try {
             global $db;
-            $sql = "UPDATE corps SET (corp = :corp, incorp_dt = :incDt, email = :email, zipcode = :zipcode, owner = :owner, phone = :phone) WHERE id = :corpId;";
+            $sql = "UPDATE `corps` SET (corp = :corp, incorp_dt = :incDt, email = :email, zipcode = :zipcode, owner = :owner, phone = :phone) WHERE id = :corpId;";
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':corpId', $_REQUEST['corpId']);
             $stmt->bindParam(':corp',$_REQUEST['corpName']);
