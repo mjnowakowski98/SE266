@@ -38,7 +38,6 @@
                         $phone = $_REQUEST['phone'];
                         $count = addCorp($corpName, $incDt, $email, $zip, $owner, $phone);
                         var_dump($count);
-                        //include_once("feedback.php");
                         break;
                }
             } else {
