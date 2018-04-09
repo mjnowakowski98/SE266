@@ -44,7 +44,7 @@
 			// Append elements to DOM body
 			$table->appendChild($tableBody);
 			$doc->appendChild($table);
-			echo $doc->saveXML();
+			echo $doc->saveHTML();
 		?>
 	<body>
 </html>
