@@ -1,4 +1,4 @@
-<h2>Showing Record ID: </h2>
+<h2>Showing Record ID: <?php echo $corpId; ?></h2>
 <div id="corpOut">
     <p class="infotext"><strong>Company: </strong><?php echo $corp['corp']; ?></p>
     <p class="infotext"><strong>Incorporated: </strong><?php echo $corp['incorp_dt']; ?></p>
