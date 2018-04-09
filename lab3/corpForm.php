@@ -9,7 +9,7 @@
             $tmpOwner = $corp['owner'];
             $tmpPhone = $corp['phone'];
         }
-        else if($mode == "Add") {
+        else if($mode === "Add") {
             echo "Create record";
             $tmpName = "";
             $tmpDt = "";
@@ -21,6 +21,7 @@
     ?>
 </h2>
 <form action="index.php" method="POST">
+    <input type="hidden" name="corpId" value="<?php if($mode === "Save") echo $corpId; else echo '-1'; ?>">
     <label class="corpInputLbl">Corp name: <input class="corpInput" type="text" name="corpName" value="<?php echo $tmpName; ?>"></label>
     <label class="corpInputLbl">Incorporated date: <input class="corpInput" type="text" name="incDt" value="<?php echo $tmpDt; ?>"></label>
     <label class="corpinputLbl">Email: <input class="corpInput" type="text" name="email" value="<?php echo $tmpEmail; ?>"></label>

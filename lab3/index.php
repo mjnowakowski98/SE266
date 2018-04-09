@@ -7,7 +7,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Lab 2</title>
+        <title>Lab 3</title>
         <link href="./master.css" type="text/css" rel="stylesheet">
     </head>
     <body>
@@ -20,7 +20,7 @@
            require_once("dbfunctions.php");
            if(array_key_exists('action', $_REQUEST)) {
                $action = $_REQUEST['action'];
-               if(array_key_exists('corpId', $_REQUEST) )$corpId = $_REQUEST['corpId'];
+               if(array_key_exists('corpId', $_REQUEST)) $corpId = $_REQUEST['corpId'];
                switch($action) {
                     case "Read":
                         $corp = getCorp($corpId);
@@ -32,7 +32,12 @@
                         include_once("corpForm.php");
                         break;
                     case "Save":
-                        
+                        $count = updateCorp($corpId);
+                        echo "$count rows affected.";
+
+                        $mode = "Save";
+                        $corp = getCorp($corpId);
+                        include_once("corpForm.php");
                         break;
                     case "Create":
                         $mode = "Add";
