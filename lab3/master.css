@@ -31,6 +31,18 @@
 	display:block;
 }
 
+a.linkBtn {
+	text-decoration:none;
+	color:black;
+	cursor:default;
+}
+
+a.linkBtn :visited {
+	text-decoration:none;
+	color:black;
+	cursor:default;
+}
+
 .infoText {
 	margin:0;
 }

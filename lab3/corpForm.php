@@ -29,4 +29,5 @@
     <label class="corpInputLbl">Owner: <input class="corpInput" type="text" name="owner" value="<?php echo $tmpOwner; ?>"></label>
     <label class="corpInputLbl">Phone: <input class="corpInput" type="text" name="phone" value="<?php echo $tmpPhone; ?>"></label>
     <input type="submit" name="action" value="<?php echo $mode; ?>">
+    <button><a class="linkBtn" href="index.php">Back</a></button>
 </form>

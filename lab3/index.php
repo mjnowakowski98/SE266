@@ -16,6 +16,11 @@
         </header>
         <hr>
         <?php
+            function outCorpList() {
+                $corporations = getRows();
+                include_once("corporations.php");
+            }
+
            require_once("dbcontroller.php");
            require_once("dbfunctions.php");
            if(array_key_exists('action', $_REQUEST)) {
@@ -39,11 +44,17 @@
                         $corp = getCorp($corpId);
                         include_once("corpForm.php");
                         break;
+                    case "Delete":
+                        $count = deleteCorp($corpId);
+                        echo "$count rows affected <hr>";
+                        outCorpList();
+                        break;
                     case "Create":
                         $mode = "Add";
                         include_once("corpForm.php");
                         break;
                     case "Add":
+                        $mode = "Add";
                         $corpName = $_REQUEST['corpName'];
                         $incDt = $_REQUEST['incDt'];
                         $email = $_REQUEST['email'];
@@ -54,10 +65,12 @@
                         echo "$count rows affected";
                         include_once("corpForm.php");
                         break;
+                    default:
+                        outCorpList();
+                        break;
                }
             } else {
-                $corporations = getRows();
-                include_once("corporations.php");
+                outCorpList();
             }
         ?>
     </body>

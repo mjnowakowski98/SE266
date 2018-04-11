@@ -41,6 +41,14 @@
         $updateButton->setAttribute("value", "Update");
         $newForm->appendChild($updateButton);
 
+        // Delete
+        $deleteButton = $doc->createElement("input");
+        $deleteButton->setAttribute("class", "corpListBtn");
+        $deleteButton->setAttribute("type", "submit");
+        $deleteButton->setAttribute("name", "action");
+        $deleteButton->setAttribute("value", "Delete");
+        $newForm->appendChild($deleteButton);
+
         $doc->appendChild($newForm);
         $doc->appendChild($doc->createElement("hr"));
 
