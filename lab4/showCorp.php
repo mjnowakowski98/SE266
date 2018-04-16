@@ -6,7 +6,7 @@
     <p class="infotext"><strong>Zip: </strong><?php echo $corp['zipcode']; ?></p>
     <p class="infotext"><strong>Owner: </strong><?php echo $corp['owner']; ?></p>
     <p class="infotext"><strong>Phone: </strong><?php echo $corp['phone']; ?></p>
-    <form action="index.php" method="POST">
+    <form action="index.php" method="GET">
         <input type="hidden" name="corpId" value="<?php echo $corpId; ?>">
         <input type="submit" name="action" value="Update">
         <input type="submit" name="action" value="Delete">

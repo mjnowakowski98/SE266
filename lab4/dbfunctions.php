@@ -58,7 +58,7 @@
     function getRows() {
         try {
             global $db;
-            $sql = "SELECT * FROM corps";
+            $sql = "SELECT id, corp FROM corps";
             $stmt = $db->prepare($sql);
             $stmt->execute();
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -15,7 +15,7 @@
         $newForm = $doc->createElement("form");
         $newForm->setATtribute("class", "corpListForm");
         $newForm->setAttribute("action", "index.php");
-        $newForm->setAttribute("method", "POST");
+        $newForm->setAttribute("method", "GET");
 
         // Set corpId: internal use
         $hdnCorpId = $doc->createElement("input");
