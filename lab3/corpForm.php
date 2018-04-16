@@ -3,7 +3,6 @@
         if($mode === "Save") {
             echo "Updating record with Id: $corpId";
             $tmpName = $corp['corp'];
-            $tmpDt = $corp['incorp_dt'];
             $tmpEmail = $corp['email'];
             $tmpZip = $corp['zipcode'];
             $tmpOwner = $corp['owner'];
@@ -12,7 +11,6 @@
         else if($mode === "Add") {
             echo "Create record";
             $tmpName = "";
-            $tmpDt = "";
             $tmpEmail = "";
             $tmpZip = "";
             $tmpOwner = "";
@@ -23,7 +21,6 @@
 <form action="index.php" method="POST">
     <input type="hidden" name="corpId" value="<?php if($mode === "Save") echo $corpId; else echo '-1'; ?>">
     <label class="corpInputLbl">Corp name: <input class="corpInput" type="text" name="corpName" value="<?php echo $tmpName; ?>"></label>
-    <label class="corpInputLbl">Incorporated date: <input class="corpInput" type="text" name="incDt" value="<?php echo $tmpDt; ?>"></label>
     <label class="corpinputLbl">Email: <input class="corpInput" type="text" name="email" value="<?php echo $tmpEmail; ?>"></label>
     <label class="corpInputLbl">Zip code: <input class="corpInput" type="text" name="zipcode" value="<?php echo $tmpZip; ?>"></label>
     <label class="corpInputLbl">Owner: <input class="corpInput" type="text" name="owner" value="<?php echo $tmpOwner; ?>"></label>
