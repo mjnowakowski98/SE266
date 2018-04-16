@@ -1,3 +1,31 @@
+<form action="index.php" method="GET">
+    <label>Sort Column:
+        <select name="sortCol">
+            <!-- TODO: Auto-gen fields using php -->
+            
+        </select>
+    </label>
+    <!-- TODO: Not required, consider making radio values persistent -->
+    <label>Ascending: <input type="radio" name="sortDir" value="asc"></label>
+    <label>Descending: <input type="radio" name="sortDir" value="desc"></label>
+    <input type="submit">
+    <input type="reset">
+</form>
+
+<br>
+<form action="index.php" method="GET">
+    <label> Search Column: 
+        <select name="searchCol">
+            <!-- TODO: Same as previous select -->
+            
+        </select>
+    </label>
+    <label>Term: <input type="search" name="searchTerm"></label>
+    <input type="submit">
+    <input type="reset">
+</form>
+
+<hr>
 <?php
     $doc = new DOMDocument(); // Get document
 

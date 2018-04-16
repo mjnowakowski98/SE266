@@ -65,4 +65,11 @@
             return $results;
         } catch (PDOException $e) { die("Failed to retrieve list of corporations"); }
     }
+
+    function getColumnNames() {
+        try {
+            global $db;
+            // TODO: Implement this function
+        } catch(PDOException $e) { die("Cannot figure out table format"); }
+    }
 ?>
