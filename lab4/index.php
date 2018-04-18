@@ -14,7 +14,13 @@
         <div id="wrapper">
             <?php
                 function outCorpList() {
-                    $corporations = getRows();
+                    // TODO: Clean this shit up
+                    if(array_key_exists('sortCol', $_REQUEST))
+                            $corporations = getRows($_REQUEST['sortCol'], $_REQUEST['sortDir'], NULL, NULL);
+                    else if(array_key_exists('searchCol', $_REQUEST))
+                        $corporations = getRows(NULL, NULL, $_REQUEST['searchCol'], $_REQUEST['searchTerm']);
+                    else $corporations = getRows(NULL, NULL, NULL, NULL);
+
                     include_once("corporations.php");
                 }
 
@@ -66,9 +72,7 @@
                             outCorpList();
                             break;
                    }
-                } else {
-                    outCorpList();
-                }
+                } else outCorpList();
             ?>
         </div>
     </body>

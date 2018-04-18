@@ -1,13 +1,29 @@
+<?php
+    $columns = getColumnInfo();
+?>
+
 <form action="index.php" method="GET">
     <label>Sort Column:
         <select name="sortCol">
-            <!-- TODO: Auto-gen fields using php -->
-            
+            <?php
+                $doc = new DOMDocument();
+                foreach($columns as $column) {
+                    $value = $column['Field'];
+
+                    $newOption = $doc->createElement("option");
+                    $newOption->setAttribute("name", "sortCol");
+                    $newOption->setAttribute("value", $value);
+                    $newOption->appendChild($doc->createTextNode($value));
+                    $doc->appendChild($newOption);
+                }
+
+                echo $doc->saveHTML();
+            ?>
         </select>
     </label>
     <!-- TODO: Not required, consider making radio values persistent -->
-    <label>Ascending: <input type="radio" name="sortDir" value="asc"></label>
-    <label>Descending: <input type="radio" name="sortDir" value="desc"></label>
+    <label>Ascending: <input type="radio" name="sortDir" value="ASC" checked></label>
+    <label>Descending: <input type="radio" name="sortDir" value="DESC"></label>
     <input type="submit">
     <input type="reset">
 </form>
@@ -16,8 +32,22 @@
 <form action="index.php" method="GET">
     <label> Search Column: 
         <select name="searchCol">
-            <!-- TODO: Same as previous select -->
-            
+            <?php
+                $doc = new DOMDocument();
+                foreach($columns as $column) {
+                    $value = $column['Field'];
+
+                    $newOption = $doc->createElement("option");
+                    $newOption->setAttribute("name", "sortCol");
+                    $newOption->setAttribute("value", $value);
+
+                    $newOption->appendChild($doc->createTextNode($value));
+
+                    $doc->appendChild($newOption);
+                }
+
+                echo $doc->saveHTML();
+            ?>
         </select>
     </label>
     <label>Term: <input type="search" name="searchTerm"></label>

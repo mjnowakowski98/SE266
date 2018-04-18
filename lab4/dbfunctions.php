@@ -55,21 +55,69 @@
         } catch(PDOException $e) { die("Failed to add corp: $corpName"); }
     }
 
-    function getRows() {
+
+
+
+
+    /*
+
+
+
+
+
+    BIG OBVIOUS BROKEN FUNCTION
+    
+    
+    
+    
+    
+    */
+    function getRows($sortCol, $sortDir, $searchCol, $searchTerm) {
         try {
             global $db;
             $sql = "SELECT id, corp FROM corps";
+            if($searchCol) $sql .= " WHERE :searchCol LIKE %:searchTerm%";
+            if($sortCol) $sql .= " ORDER BY :sortCol :sortDir";
+            $sql .= ";";
+
             $stmt = $db->prepare($sql);
+            if($searchCol) $stmt->bindParam(':searchCol', $searchCol);
+            if($searchTerm) $stmt->bindParam(':searchTerm', $searchTerm);
+            if($sortCol) {
+                $stmt->bindParam(':sortCol', $sortCol);
+                $stmt->bindParam(':sortDir', $sortDir);
+            }
             $stmt->execute();
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $stmt->debugDumpParams();
+
+            //var_dump($results);
+
             return $results;
         } catch (PDOException $e) { die("Failed to retrieve list of corporations"); }
     }
 
-    function getColumnNames() {
+    /*
+
+
+    Too far
+
+
+
+    */
+
+
+
+
+    function getColumnInfo() {
         try {
             global $db;
-            // TODO: Implement this function
+            $sql = "SHOW COLUMNS FROM corps;";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
         } catch(PDOException $e) { die("Cannot figure out table format"); }
     }
 ?>
