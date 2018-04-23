@@ -1,4 +1,5 @@
 <?php
+    // Read information on selected corporation
     function getCorp($corpId) {
         try {
             global $db;
@@ -11,6 +12,7 @@
         } catch(PDOException $e) { die("Failed to get corp information with Id: $corpId"); }
     }
 
+    // Update information for existing corporations
     function updateCorp($corpId) {
         try {
             global $db;
@@ -29,6 +31,7 @@
         } catch(PDOException $e) { die("Failed to update corp with Id: $corpId"); }
     }
 
+    // Delete corporation from database
     function deleteCorp($corpId) {
         try {
             global $db;
@@ -40,6 +43,7 @@
         } catch (PDOException $e) { die("Failed to delete record wih Id: $corpId"); }
     }
 
+    // Add corporation to database
     function addCorp($corpName, $incDt, $email, $zip, $owner, $phone) {
         try {
             global $db;
@@ -55,61 +59,34 @@
         } catch(PDOException $e) { die("Failed to add corp: $corpName"); }
     }
 
-
-
-
-
-    /*
-
-
-
-
-
-    BIG OBVIOUS BROKEN FUNCTION
-    
-    
-    
-    
-    
-    */
-    function getRows($sortCol, $sortDir, $searchCol, $searchTerm) {
+    // Get only id and name - prevents unnecessary calls to database
+    function getRows() {
         try {
             global $db;
-            $sql = "SELECT id, corp FROM corps";
-            if($searchCol) $sql .= " WHERE :searchCol LIKE %:searchTerm%";
-            if($sortCol) $sql .= " ORDER BY :sortCol :sortDir";
-            $sql .= ";";
-
+            $sql = "SELECT id, corp FROM corps;";
             $stmt = $db->prepare($sql);
-            if($searchCol) $stmt->bindParam(':searchCol', $searchCol);
-            if($searchTerm) $stmt->bindParam(':searchTerm', $searchTerm);
-            if($sortCol) {
-                $stmt->bindParam(':sortCol', $sortCol);
-                $stmt->bindParam(':sortDir', $sortDir);
-            }
             $stmt->execute();
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            $stmt->debugDumpParams();
-
-            //var_dump($results);
-
             return $results;
         } catch (PDOException $e) { die("Failed to retrieve list of corporations"); }
     }
 
-    /*
+    // Get everything - needed to sort results by unknown key
+    // ORDER BY clause not intended in prepared statements, sorting must be done after data is retrieved
+    // Susceptible to SQL Injection through other methods
+    function getAll() {
+        try {
+            global $db;
+            $sql = "SELECT * FROM corps;";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+        } catch (PDOException $e) { die("Failed to retrieve list of corporations"); }
+    }
 
-
-    Too far
-
-
-
-    */
-
-
-
-
+    // Get information on columns in table
+    // Works with MariaDB, may not work with other DBMS
     function getColumnInfo() {
         try {
             global $db;
