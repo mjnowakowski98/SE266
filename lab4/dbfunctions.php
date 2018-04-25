@@ -60,26 +60,28 @@
     }
 
     // Get only id and name - prevents unnecessary calls to database
-    function getRows() {
+    function getRows($sortCol = NULL, $sortDir = NULL, $searchCol = NULL, $searchTerm = NULL) {
         try {
             global $db;
-            $sql = "SELECT id, corp FROM corps;";
-            $stmt = $db->prepare($sql);
-            $stmt->execute();
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $results;
-        } catch (PDOException $e) { die("Failed to retrieve list of corporations"); }
-    }
+            $sql = "SELECT id, corp FROM corps";
+            if($searchCol) $sql .= " WHERE :searchCol LIKE CONCAT('%',:searchTerm,'%')";
+            if($sortCol) $sql .= " ORDER BY :sortCol :sortDir";
+            $sql .= ';';
 
-    // Get everything - needed to sort results by unknown key
-    // ORDER BY clause not intended in prepared statements, sorting must be done after data is retrieved
-    // Susceptible to SQL Injection through other methods
-    function getAll() {
-        try {
-            global $db;
-            $sql = "SELECT * FROM corps;";
             $stmt = $db->prepare($sql);
+            if($searchCol) {
+                $stmt->bindParam(':searchCol', $searchCol);
+                $stmt->bindParam(':searchTerm', $searchTerm);
+            }
+            if($sortCol) {
+                $stmt->bindParam(':sortCol', $sortCol);
+                $stmt->bindParam(':sortDir', $sortDir);
+            }
+
             $stmt->execute();
+
+            $stmt->debugDumpParams();
+
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $results;
         } catch (PDOException $e) { die("Failed to retrieve list of corporations"); }

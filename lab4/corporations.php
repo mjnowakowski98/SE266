@@ -58,36 +58,13 @@
 
 <hr>
 
-<!-- Put into table to appease instructor -->
-<!-- I disagree with this though, table formatting -->
-<!-- is no longer a good practice with CSS 3 around -->
-
 <table>
 <tbody>
     <?php
-        $doc = new DOMDocument(); // Get document
+        $doc = new DOMDocument();
 
-        // Sort arrays by specified key
-        if(array_key_exists('sortCol', $_REQUEST)) {
-            if($_REQUEST['sortDir'] === 'DESC')
-                usort($corporations, function($a, $b) {
-                    return $b[$_REQUEST['sortCol']] <=> $a[$_REQUEST['sortCol']];
-                });
-            else usort($corporations, function($a, $b) {
-                return $a[$_REQUEST['sortCol']] <=> $b[$_REQUEST['sortCol']];
-            });
-        }
-
-        // Output list of corporations
-        //$count = 0; // No use - might implement later
+        $count = 0;
         foreach($corporations as $corp) {
-            // Filter corp list
-            if(array_key_exists('searchCol', $_REQUEST)) {
-                // Check if substring specified by user
-                // is in column specified by user
-                if(strpos($corp[$_REQUEST['searchCol']], $_REQUEST['searchTerm']) === FALSE)
-                    continue; // Skip/increment if not
-            }
 
             // Make table-row and 1st col (CorpName)
             $newRow = $doc->createElement("tr");
@@ -146,7 +123,7 @@
             $newRow->appendChild($newColForm);
             $doc->appendChild($newRow); // Add row to table
 
-            //$count++;
+            $count++;
         }
 
         echo $doc->saveHTML(); // Write to DOM
