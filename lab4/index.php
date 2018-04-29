@@ -14,16 +14,33 @@
         <!-- TODO: Style wrapper, eventually -->
         <div id="wrapper">
             <?php
-                function outCorpList() {
-                    if(array_key_exists('sortCol', $_REQUEST) || array_key_exists('searchCol', $_REQUEST))
-                        $corporations = getAll(); // Must get all info to sort/search on unknown column
-                    else $corporations = getRows(); // If there's a way around this I would like to know
-                    include_once("corporations.php"); // Display output part
-                }
-
                 // Include database functions
                require_once("dbcontroller.php");
                require_once("dbfunctions.php");
+
+                function outCorpList() {
+                    // Initialize filters
+                    $sortCol = NULL;
+                    $sortDir = NULL;
+                    $searchCol = NULL;
+                    $searchTerm = NULL;
+
+                    // If sort column is specified fill vars
+                    if(array_key_exists('sortCol', $_REQUEST)) {
+                        $sortCol = $_REQUEST['sortCol'];
+                        $sortDir = $_REQUEST['sortDir'];
+                    }
+
+                    // If search column is specified fill vars
+                    if(array_key_exists('searchCol', $_REQUEST)) {
+                        $searchCol = $_REQUEST['searchCol'];
+                        $searchTerm = $_REQUEST['searchTerm'];
+                    }
+
+                    // Get corp list based on sort/filters
+                    $corporations = getRows($sortCol, $sortDir, $searchCol, $searchTerm);
+                    include_once("corporations.php"); // Build and show the list
+               }
 
                // Check if a form submitted a request with name 'action'
                if(array_key_exists('action', $_REQUEST)) {

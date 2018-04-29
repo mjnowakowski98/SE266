@@ -60,25 +60,33 @@
     }
 
     // Get only id and name - prevents unnecessary calls to database
-    function getRows() {
+    function getRows($sortCol = NULL, $sortDir = NULL, $searchCol = NULL, $searchTerm = NULL) {
         try {
             global $db;
-            $sql = "SELECT id, corp FROM corps;";
-            $stmt = $db->prepare($sql);
-            $stmt->execute();
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $results;
-        } catch (PDOException $e) { die("Failed to retrieve list of corporations"); }
-    }
+            $sql = "SELECT id, corp FROM corps";
+            if($searchCol)  { // Check if a column to seach was specified
+                // Unless I was doing something wrong this does prevent basic injection
+                // Not sure if function of the string being sanitized or PDO though
+                // Tested using the query: ?searchCol=id%20=1;%20INSERT%20INTO%20corps%20(corp,%20incorp_dt,%20email,%20zipcode,%20owner,%20phone)%20VALUES%20(injectTest,%20now(),%20qw@er.net,%2078965,%20scriptkiddie,%207897897896);--&searchTerm=auctor
+                // Failed to insert row, only returned record with id of 1
+                $searchCol = filter_var($searchCol, FILTER_SANITIZE_STRING);
+                $sql .= " WHERE $searchCol LIKE CONCAT('%',:searchTerm,'%')"; // Append where clause to query
+                // Use concat to prevent bindParam messing up
+            }
+            if($sortCol) { // Check if sorting column was specified
+                $sortCol = filter_var($sortCol, FILTER_SANITIZE_STRING);
+                $sql .= " ORDER BY $sortCol ";
+                if($sortDir === 'DESC') $sql .= 'DESC'; // Specify descending order if selected, ascending is default
+            }
+            $sql .= ';';
 
-    // Get everything - needed to sort results by unknown key
-    // ORDER BY clause not intended in prepared statements, sorting must be done after data is retrieved
-    // Susceptible to SQL Injection through other methods
-    function getAll() {
-        try {
-            global $db;
-            $sql = "SELECT * FROM corps;";
+            // Prepare sql string
             $stmt = $db->prepare($sql);
+            if($searchCol) // bind parameters from user input
+                $stmt->bindParam(':searchTerm', $searchTerm);
+            if($sortCol)
+                $stmt->bindParam(':sortDir', $sortDir);
+
             $stmt->execute();
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $results;
