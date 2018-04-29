@@ -19,21 +19,27 @@
                require_once("dbfunctions.php");
 
                 function outCorpList() {
+                    // Initialize filters
                     $sortCol = NULL;
                     $sortDir = NULL;
                     $searchCol = NULL;
                     $searchTerm = NULL;
+
+                    // If sort column is specified fill vars
                     if(array_key_exists('sortCol', $_REQUEST)) {
                         $sortCol = $_REQUEST['sortCol'];
                         $sortDir = $_REQUEST['sortDir'];
                     }
+
+                    // If search column is specified fill vars
                     if(array_key_exists('searchCol', $_REQUEST)) {
                         $searchCol = $_REQUEST['searchCol'];
                         $searchTerm = $_REQUEST['searchTerm'];
                     }
 
+                    // Get corp list based on sort/filters
                     $corporations = getRows($sortCol, $sortDir, $searchCol, $searchTerm);
-                    include_once("corporations.php");
+                    include_once("corporations.php"); // Build and show the list
                }
 
                // Check if a form submitted a request with name 'action'

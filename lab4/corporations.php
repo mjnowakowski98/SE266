@@ -1,25 +1,27 @@
 <?php
     $columns = getColumnInfo(); // Grab column information
+
+    function createColumnOptions($columns) {
+        // Dynamically assign options based on column names
+        $doc = new DOMDocument();
+        foreach($columns as $column) {
+            $value = $column['Field']; // Key 'Field' returned by mariadb
+
+            $newOption = $doc->createElement("option");
+            $newOption->setAttribute("name", "sortCol");
+            $newOption->setAttribute("value", $value);
+            $newOption->appendChild($doc->createTextNode($value));
+            $doc->appendChild($newOption);
+        }
+
+        echo $doc->saveHTML(); // Append to html
+    }
 ?>
 
 <form action="index.php" method="GET">
     <label>Sort Column:
         <select name="sortCol">
-            <?php
-                // Dynamically assign options based on column names
-                $doc = new DOMDocument();
-                foreach($columns as $column) {
-                    $value = $column['Field'];
-
-                    $newOption = $doc->createElement("option");
-                    $newOption->setAttribute("name", "sortCol");
-                    $newOption->setAttribute("value", $value);
-                    $newOption->appendChild($doc->createTextNode($value));
-                    $doc->appendChild($newOption);
-                }
-
-                echo $doc->saveHTML();
-            ?>
+            <?php createColumnOptions($columns); ?>
         </select>
     </label>
     <label>Ascending: <input type="radio" name="sortDir" value="ASC" checked></label>
@@ -32,23 +34,7 @@
 <form action="index.php" method="GET">
     <label> Search Column: 
         <select name="searchCol">
-            <?php
-                // Dynamically assign options based on column names
-                $doc = new DOMDocument();
-                foreach($columns as $column) {
-                    $value = $column['Field'];
-
-                    $newOption = $doc->createElement("option");
-                    $newOption->setAttribute("name", "searchCol");
-                    $newOption->setAttribute("value", $value);
-
-                    $newOption->appendChild($doc->createTextNode($value));
-
-                    $doc->appendChild($newOption);
-                }
-
-                echo $doc->saveHTML();
-            ?>
+            <?php createColumnOptions($columns); ?>
         </select>
     </label>
     <label>Term: <input type="search" name="searchTerm"></label>

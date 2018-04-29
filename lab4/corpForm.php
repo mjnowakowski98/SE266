@@ -1,7 +1,9 @@
 <h2>
     <?php
+    // Setup form modes, save used for updates, add to create a new record
         if($mode === "Save") {
             echo "Updating record with Id: $corpId";
+            // Fill existing corporation data
             $tmpName = $corp['corp'];
             $tmpEmail = $corp['email'];
             $tmpZip = $corp['zipcode'];
@@ -10,6 +12,7 @@
         }
         else if($mode === "Add") {
             echo "Create record";
+            // Blank out forms
             $tmpName = "";
             $tmpEmail = "";
             $tmpZip = "";
