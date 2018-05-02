@@ -10,6 +10,30 @@
         } catch(PDOException $e) { die("Failed to retrieve site list from db"); }
     }
 
+    function getSiteLinks($siteID) {
+        global $db;
+        try {
+            $sql = "SELECT site_id, link FROM sitelinks WHERE site_id = :siteID;";
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':siteID', $siteID);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+        } catch(PDOException $e) { die("Failed to retrieve links for site"); }
+    }
+
+    function getListingInfo($siteID) {
+        global $db;
+        try {
+            $sql = "SELECT site, date FROM sites WHERE site_id = :siteID;";
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':siteID', $siteID);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        } catch(PDOException $e) { die("Failed to retrive site name for id: $siteID"); }
+    }
+
     function addSite($siteName, $siteLinks) {
         global $db;
         try {
@@ -18,22 +42,29 @@
             $stmt->bindParam(':siteName', $siteName);
             $success = $stmt->execute();
 
-            $sql = "SELECT site_id FROM sites ORDER BY site_id DESC LIMIT 1;";
-            $stmt = $db->prepare($sql);
-            $stmt->execute();
-            $newID = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            var_dump($newID[0]['site_id']);
+            $newID = $db->lastInsertId();
             
             foreach($siteLinks as $link) {
-                if(!preg_match('/(https?:\/\/[\da-z\.-]+\.[a-z\.]{2,6}[\/\w \.-]+)/', $link)) continue;
+                if(!preg_match('/(https?:\/\/[\da-z\.-]+\.[a-z\.]{2,6}[\/\w \.-]+)/', $link)) {
+                    echo "Failed to insert $link to db: Invalid";
+                    continue;
+                }
 
-                $sql = "INSERT INTO sitelinks (site_id, link) VALUES (:id, :link)";
+                $sql = "INSERT INTO sitelinks VALUES (:id, :link)";
                 $stmt = $db->prepare($sql);
-                $stmt->bindParam(':id', $newID[0]['site_id'], PDO::PARAM_INT);
+                $stmt->bindParam(':id', $newID, PDO::PARAM_INT);
                 $stmt->bindParam(':link', $link);
                 $stmt->execute();
-                var_dump($stmt->rowCount());
             }
+
+            $newSite = [
+                "siteID" => $newID,
+                "rowCount" => $stmt->rowCount(),
+                "siteInfo" => getListingInfo($newID),
+                "siteLinks" => getSiteLinks($newID)
+            ];
+
+            return $newSite;
             
         } catch (PDOException $e)  { die("Failed to add site"); }
     }
