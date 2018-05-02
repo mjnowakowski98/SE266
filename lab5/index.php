@@ -41,13 +41,15 @@
             ?>
 
             <form action="index.php" method="GET">
-                <input type="text" name="crawlUrl" value="<?php echo $strInput?>">
-                <input type="submit">
+                <input class="dbEntry" type="text" name="crawlUrl" value="<?php echo $strInput?>">
+                <br>
+                <input class="dbEntryBtn" type="submit">
+                <input class= "dbEntryBtn" type="reset">
             </form>
 
             <?php
                 function outputNewSite($site) {
-                    echo $site['rowCount'] . " rows affected.";
+                    echo $site['rowCount'] . " rows affected. ";
                     echo "Displaying record for site: " . $site['siteInfo']['site'] . " created: " . $site['siteInfo']['date'];
 
                     $doc = new DOMDocument();
