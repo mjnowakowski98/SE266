@@ -1,6 +1,13 @@
 <?php
     function getSiteList() {
-
+        global $db;
+        try {
+            $sql = "SELECT site_id, site FROM sites ORDER BY date;";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+        } catch(PDOException $e) { die("Failed to retrieve site list from db"); }
     }
 
     function addSite($siteName, $siteLinks) {
