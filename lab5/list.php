@@ -1,7 +1,7 @@
-<?php
+<?php // Include db access functions and get list of known urls
     require_once("db.php");
     require_once("dbfunctions.php");
-    $options = getSiteList();
+    $options = getSiteList(); // Get id and name for each link
 ?>
 
 <!DOCTYPE html>
@@ -14,12 +14,13 @@
 
     <body>
         <div id="wrapper">
+            <!-- Include master page header -->
             <?php include_once("header.html"); ?>
 
             <form action="#" method="GET">
                 <select name="siteID">
                     <option value>Choose a site</option>
-                    <?php
+                    <?php // Populate select list with known sites
                         $doc = new DOMDocument();
                         foreach($options as $site) {
                             $newOption = $doc->createElement("option");
@@ -34,13 +35,14 @@
             </form>
 
             <?php
-                if(array_key_exists('siteID', $_REQUEST)) {
+                if(array_key_exists('siteID', $_REQUEST)) { // Check if a site was selected
                     $siteID = $_REQUEST['siteID'];
                     $siteLinks = getSiteLinks($siteID);
                     $siteInfo = getListingInfo($siteID);
 
                     echo "Displaying " . count($siteLinks) . " links for site: " . $siteInfo['site'] . " created: " . $siteInfo['date'];
 
+                    // Output list of links within a site
                     $doc = new DOMDocument();
                     foreach($siteLinks as $link) {
                         $newP = $doc->createElement("p");
@@ -51,9 +53,10 @@
                         $doc->appendChild($newP);
                     }
                     echo $doc->saveHTML();
-                }
+                } else echo 'Please select a site';
             ?>
 
+            <!-- Include master page footer -->
             <?php include_once("footer.html"); ?>
         </div>
     </body>
