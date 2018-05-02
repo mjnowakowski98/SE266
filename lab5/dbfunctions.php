@@ -15,7 +15,18 @@
             $stmt = $db->prepare($sql);
             $stmt->execute();
             $newID = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            var_dump($newID[0]['site_id']);
             
+            foreach($siteLinks as $link) {
+                if(!preg_match('/(https?:\/\/[\da-z\.-]+\.[a-z\.]{2,6}[\/\w \.-]+)/', $link)) continue;
+
+                $sql = "INSERT INTO sitelinks (site_id, link) VALUES (:id, :link)";
+                $stmt = $db->prepare($sql);
+                $stmt->bindParam(':id', $newID[0]['site_id'], PDO::PARAM_INT);
+                $stmt->bindParam(':link', $link);
+                $stmt->execute();
+                var_dump($stmt->rowCount());
+            }
             
         } catch (PDOException $e)  { die("Failed to add site"); }
     }
