@@ -1,0 +1,41 @@
+.popupCenter {
+    position:fixed;
+    top:50%;
+    right:50%;
+
+    border:2px solid black;
+}
+
+#authForm {
+    width:175px;
+    height:110px;
+    margin-left:-87.5px;
+    margin-top:-55px;
+}
+
+#signupForm {
+    width:189px;
+    height:268px;
+    margin-left:-94.5px;
+    margin-top:-134px;
+    padding:5px;
+}
+
+.formSubmit {
+    text-align:center;
+    margin-top:5px;
+}
+
+.formBtn {
+    width:65px;
+    height:25px;
+}
+
+.formAlignRight {
+    float:right;
+}
+
+.vertForm {
+    display:block;
+    margin-bottom:5px;
+}
