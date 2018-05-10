@@ -1,6 +1,5 @@
 <?php
     if(!isset($prevPage)) $prevPage = "#";
-
     $_SESSION['mode'] = 'admin';
 ?>
 

@@ -9,10 +9,20 @@
 
     <body>
         <div id="wrapper">
-            <?php include_once("master/header.html"); ?>
+            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/header.html"); ?>
             <?php
                 session_start();
-                $_SESSION['testKey'] = true;
+
+                if(array_key_exists('action', $_REQUEST)) {
+                    $action = $_REQUEST['action'];
+                    switch($action) {
+                        case 'logout':
+                            $_SESSION['mode'] = 'generic';
+                            break;
+                        default:
+                            break;
+                    }
+                }
             ?> 
 
             <section id="content">
@@ -20,7 +30,7 @@
                 <a href="/lab6/admin/index.php">Admin page</a>
             </section>
 
-            <?php include_once("master/footer.html"); ?>
+            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/footer.html"); ?>
         </div>
     </body>
 </html>
