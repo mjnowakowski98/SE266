@@ -1,29 +1,21 @@
-.popupCenter {
-    position:fixed;
-    top:50%;
-    right:50%;
-
-    border:2px solid black;
+#dimmer {
+    margin:0;
+    padding:0;
+    position:absolute;
+    width:100%;
+    height:100%;;
+    top:0;
+    left:0;
+    z-index:2;
 }
 
-#authForm {
-    width:175px;
-    height:110px;
-    margin-left:-87.5px;
-    margin-top:-55px;
+.dimmerOverlay {
+    z-index:3;
 }
 
-#signupForm {
-    width:189px;
-    height:268px;
-    margin-left:-94.5px;
-    margin-top:-134px;
-    padding:5px;
-}
-
-.formSubmit {
+.formCenter {
     text-align:center;
-    margin-top:5px;
+    margin:auto 0;
 }
 
 .formBtn {
@@ -31,11 +23,21 @@
     height:25px;
 }
 
-.formAlignRight {
-    float:right;
+#signupForm {
+    width:304px;
+    height:345px;
+
+    margin:0 auto;
+
+    padding:5px;
+
+    border:2px solid black;
 }
 
-.vertForm {
-    display:block;
-    margin-bottom:5px;
+#signupForm .txtBox {
+    width:300px;
+}
+
+#signupForm p {
+    margin:5px 0;
 }

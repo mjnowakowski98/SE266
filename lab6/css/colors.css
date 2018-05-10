@@ -1,0 +1,7 @@
+#dimmer {
+    background-color:rgba(35, 35, 35, .8);
+}
+
+.dimmerOverlay {
+    background-color:white;
+}

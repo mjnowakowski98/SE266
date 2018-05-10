@@ -10,8 +10,16 @@
     <body>
         <div id="wrapper">
             <?php include_once("master/header.html"); ?>
+            <?php
+                session_name("userSession");
+                session_start();
 
-            
+                $_SESSION['testKey'] = true;
+            ?> 
+
+            <section id="content">
+                <p>Placeholder Content</p>
+            </section>
 
             <?php include_once("master/footer.html"); ?>
         </div>
