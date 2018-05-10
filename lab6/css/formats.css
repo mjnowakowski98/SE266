@@ -25,9 +25,14 @@
 
 #signupForm {
     width:304px;
-    height:345px;
+    height:365px;
+    position:absolute;
 
-    margin:0 auto;
+    top:50%;
+    left:50%;
+
+    margin-left:-159px;;
+    margin-top:-189.5px;
 
     padding:5px;
 
