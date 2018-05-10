@@ -21,6 +21,7 @@
         <div class="formCenter">
             <input class="formBtn" type="submit">
             <input class="formBtn" type="reset">
+            <button class="formBtn"><a href="#">Cancel</a></button>
         </div>
     </form>
 </section>
