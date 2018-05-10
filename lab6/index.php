@@ -17,6 +17,7 @@
 
             <section id="content">
                 <p>Placeholder Content</p>
+                <a href="/lab6/admin/index.php">Admin page</a>
             </section>
 
             <?php include_once("master/footer.html"); ?>

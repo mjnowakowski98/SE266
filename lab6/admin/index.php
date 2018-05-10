@@ -20,7 +20,11 @@
         <p>Alienum suscipiantur ex vim, ne perpetua assentior adversarium mel. In reque voluptatum sadipscing eam, mei veritus facilis pertinax ne, duis graecis evertitur est no. Cu pro tota dicta saperet. At facilis imperdiet vis, mei elit menandri volutpat et. Ne eam posse vitae.</p>
 
         <?php
-            include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/signup.php")
+            session_start();
+            $prevPage = $_SERVER['PHP_SELF'];
+
+            if($_SESSION['mode'] !== 'admin')
+                include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/signup.php")
         ?>
     </body>
 </html>

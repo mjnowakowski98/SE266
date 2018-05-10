@@ -1,3 +1,9 @@
+<?php
+    if(!isset($prevPage)) $prevPage = "#";
+
+    $_SESSION['mode'] = 'admin';
+?>
+
 <div id="dimmer"></div>
 
 <section id="signupForm" class="dimmerOverlay">
@@ -21,7 +27,7 @@
         <div class="formCenter">
             <input class="formBtn" type="submit">
             <input class="formBtn" type="reset">
-            <button class="formBtn"><a href="#">Cancel</a></button>
+            <button class="formBtn"><a href="<?php echo $prevPage; ?>">Cancel</a></button>
         </div>
     </form>
 </section>
