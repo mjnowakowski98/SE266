@@ -6,12 +6,12 @@
 <div id="dimmer"></div>
 
 <section id="signupForm" class="dimmerOverlay">
-    <form action="#" method="POST">
+    <form action="/master/authenticator.php" method="POST">
         <h3 class="formCenter">Sign Up</h3>
 
         <hr>
         <label>Email: <input class="txtBox" type="text" name="email"></label>
-        <label>User ID: <input class="txtBox" type="text" name="usrName"></label>
+        <label>User ID: <input class="txtBox" type="text" name="userId"></label>
         <label>Password: <input class="txtBox" type="text" name="pass"></label>
         <label>Password (repeat): <input class="txtBox" type="text" name="pass2"></label>
         <label>First name: <input class="txtBox" type="text" name="fName"></label>
@@ -28,5 +28,7 @@
             <input class="formBtn" type="reset">
             <button class="formBtn"><a href="<?php echo $prevPage; ?>">Cancel</a></button>
         </div>
+
+        <input type="hidden" name="sender" value="signUp">
     </form>
 </section>

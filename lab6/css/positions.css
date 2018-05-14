@@ -39,7 +39,23 @@
     border:2px solid black;
 }
 
-#signupForm .txtBox {
+#authForm {
+    width:304px;
+    height:161px;
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    margin-left:-152px;
+    margin-top:-80.5px;
+
+    padding:5px;
+
+    border:2px solid black;
+}
+
+.txtBox {
     width:300px;
 }
 

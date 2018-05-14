@@ -25,16 +25,32 @@
 
         </div>
         <?php
-            session_start();
+            function showSignIn() {
+                $prevPage = $_SERVER['PHP_SELF'];
+                include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/auth.php");
+            }
 
             function showSignUp() {
                 $prevPage = $_SERVER['PHP_SELF'];
                 include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/signup.php");
             }
 
-            if(!array_key_exists('mode', $_SESSION)) showSignUp();
-            else if($_SESSION['mode'] !== 'admin') showSignUp();
+            session_start();
+            $action = $_GET['action'] ?? NULL;
+            $user = $_POST['userId'] ?? NULL;
 
+            if(!$user) $action = 'signIn';
+
+            switch($action) {
+                case 'signUp':
+                    showSignUp();
+                    break;
+                case 'signIn':
+                    showSignIn();
+                default:
+                    if($user != 'admin') return -10;
+                    break;
+            }
         ?>
 
         <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/footer.html"); ?>
