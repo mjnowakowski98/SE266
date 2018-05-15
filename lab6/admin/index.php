@@ -9,7 +9,7 @@
     
     <body>
         <div id="wrapper">
-            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/header.html"); ?>
+            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/header.php"); ?>
         
             <a href="/lab6/index.php">Root index</a>
             <p>Lorem ipsum dolor sit amet, cum ut munere gloriatur. At tacimates dignissim mea. Noster laboramus id has. Qui et idque evertitur dissentiunt, nec ei dico modus adversarium. His at appetere dignissim, in has altera numquam splendide.</p>
@@ -25,34 +25,12 @@
 
         </div>
         <?php
-            function showSignIn() {
-                $prevPage = $_SERVER['PHP_SELF'];
+            $user = $_SESSION['userId'] ?? NULL;
+
+            if(!$user)
                 include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/auth.php");
-            }
-
-            function showSignUp() {
-                $prevPage = $_SERVER['PHP_SELF'];
-                include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/signup.php");
-            }
-
-            session_start();
-            $action = $_GET['action'] ?? NULL;
-            $user = $_POST['userId'] ?? NULL;
-
-            if(!$user) $action = 'signIn';
-
-            switch($action) {
-                case 'signUp':
-                    showSignUp();
-                    break;
-                case 'signIn':
-                    showSignIn();
-                default:
-                    if($user != 'admin') return -10;
-                    break;
-            }
         ?>
 
-        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/footer.html"); ?>
+        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/footer.php"); ?>
     </body>
 </html>

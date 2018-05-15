@@ -1,12 +1,7 @@
-<?php
-    if(!isset($prevPage)) $prevPage = "#";
-    $_SESSION['mode'] = 'admin';
-?>
-
 <div id="dimmer"></div>
 
 <section id="signupForm" class="dimmerOverlay">
-    <form action="/master/authenticator.php" method="POST">
+    <form action="/lab6/master/authenticator.php" method="POST">
         <h3 class="formCenter">Sign Up</h3>
 
         <hr>

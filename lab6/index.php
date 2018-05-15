@@ -9,28 +9,14 @@
 
     <body>
         <div id="wrapper">
-            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/header.html"); ?>
-            <?php
-                session_start();
-
-                if(array_key_exists('action', $_REQUEST)) {
-                    $action = $_REQUEST['action'];
-                    switch($action) {
-                        case 'logout':
-                            $_SESSION['mode'] = 'generic';
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            ?> 
+            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/header.php"); ?>
 
             <section id="content">
                 <p>Placeholder Content</p>
                 <a href="/lab6/admin/index.php">Admin page</a>
             </section>
 
-            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/footer.html"); ?>
+            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/footer.php"); ?>
         </div>
     </body>
 </html>

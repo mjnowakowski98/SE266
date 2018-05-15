@@ -1,7 +1,7 @@
 <div id="dimmer"></div>
 
 <section id="authForm" class="dimmerOverlay">
-    <form action="/master/authenticator.php" method="POST">
+    <form action="/lab6/master/authenticator.php" method="POST">
         <h3 class="formCenter">Sign In</h3>
 
         <hr>
@@ -13,7 +13,7 @@
             <input class="formBtn" type="submit">
             <input class="formBtn" type="reset">
             <button class="formBtn"><a href="<?php echo $prevPage; ?>">Cancel</a></button>
-            <button class="formBtn"><a href="<?php echo $prevPage; ?>?action=signUp">Sign Up</a></button>
+            <button class="formBtn"><a href="?action=signUp">Sign Up</a></button>
         </div>
 
         <input type="hidden" name="sender" value="signIn">
