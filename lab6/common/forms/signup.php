@@ -24,6 +24,7 @@
             <button class="formBtn"><a href="<?php echo $prevPage; ?>">Cancel</a></button>
         </div>
 
+        <input type="hidden" name="prevPage" value="<?php echo $prevPage; ?>">
         <input type="hidden" name="sender" value="signUp">
     </form>
 </section>

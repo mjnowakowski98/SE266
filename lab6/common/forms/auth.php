@@ -16,6 +16,7 @@
             <button class="formBtn"><a href="?action=signUp">Sign Up</a></button>
         </div>
 
+        <input type="hidden" name="prevPage" value="<?php echo $prevPage; ?>">
         <input type="hidden" name="sender" value="signIn">
     </form>
 </section>
