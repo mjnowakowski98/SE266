@@ -18,7 +18,7 @@
 ?>
 
 <section id="header">
-    <h1>(TMP) Shopping cart project</h1>
+    <h1>Trader Dan's Space Parts Emporium</h1>
 
     <?php
         session_start();

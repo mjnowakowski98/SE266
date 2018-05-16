@@ -5,6 +5,8 @@
         <meta charset="UTF-8">
         <link href="/lab6/css/positions.css" type="text/css" rel="stylesheet">
         <link href="/lab6/css/colors.css" type="text/css" rel="stylesheet">
+        
+        <?php $isAdminPage = true; ?>;
     </head>
     
     <body>
