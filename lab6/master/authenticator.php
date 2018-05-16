@@ -1,26 +1,36 @@
 <?php
-    $sessionId = $_POST['sessionId'] ?? NULL;
-    if($sessionId) session_id($sessionId);
-
     session_start();
+
+    echo "Authenticating <br>";
 
     $prevPage = $_POST['prevPage'] ?? NULL;
     $sender = $_POST['sender'] ?? NULL;
 
+    echo "Sender: " . $sender . "<br>";
+
     switch($sender) {
-        case "logout":
-            echo "LOGOUT";
-            $_SESSION['userId'] = NULL;
-            break;
         case "signIn":
             $_SESSION['userId'] = "GenericUser";
             break;
         case "signUp":
-            echo "Sign Up Fire";
             break;
-    }
+        case "logout":
+            $_SESSION['userId'] = NULL;
+            break;
+        default:
+            break;
+    }       
 
-    session_write_close();
+    $doc = new DOMDocument();
+    $link = $doc->createElement("a");
+    $link->appendChild($doc->createTextNode("Return to: " . $prevPage));
+    $link->setAttribute("href", $prevPage . '?');
+    $doc->appendChild($link);
+
+    echo $doc->saveHTML();
+
+    // Uncomment to prevent auto-redirection
+    return 0;
 
     if($prevPage) {
         header("Location: $prevPage?");

@@ -25,9 +25,7 @@
 
         </div>
         <?php
-            $user = $_SESSION['userId'] ?? NULL;
-
-            if(!$user)
+            if(!$user && !$action)
                 include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/auth.php");
         ?>
 
