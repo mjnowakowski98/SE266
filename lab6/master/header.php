@@ -3,6 +3,7 @@
 
     <?php
         session_start();
+        var_dump(session_id());
         $user = $_SESSION['userId'] ?? NULL;
 
         $doc = new DOMDocument();
@@ -36,6 +37,28 @@
 
     switch($action) {
         case 'logout':
+            session_write_close();
+
+            $url = "http://" . $_SERVER['SERVER_NAME'] . "/lab6/master/authenticator.php";
+            $curlHandle = curl_init($url); // Get handle to curl object
+            curl_setopt($curlHandle, CURLOPT_POST, TRUE);
+
+            $postData = [
+                'sender'=>'logout',
+                'prevPage'=>$prevPage,
+                'sessionId'=>session_id()
+            ];
+            curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $postData);
+
+            curl_exec($curlHandle); // Execute curl
+
+            // Output curl errors if any
+            if($errno = curl_errno($curlHandle)) {
+                $error_message = curl_strerror($errno);
+                echo "cURL error ({$errno}):\n {$error_message}";
+            }
+
+            curl_close($curlHandle); // Close object handle and return memory
             break;
         case 'signUp':
             include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/signup.php");

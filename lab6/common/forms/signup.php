@@ -22,6 +22,7 @@
             <input class="formBtn" type="submit">
             <input class="formBtn" type="reset">
             <button class="formBtn"><a href="<?php echo $prevPage; ?>">Cancel</a></button>
+            <button class="formBtn"><a href="?action=signIn">Sign In</a></button>
         </div>
 
         <input type="hidden" name="prevPage" value="<?php echo $prevPage; ?>">
