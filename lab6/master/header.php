@@ -3,7 +3,6 @@
 
     <?php
         session_start();
-        var_dump(session_id());
         $user = $_SESSION['userId'] ?? NULL;
 
         $doc = new DOMDocument();
@@ -37,7 +36,8 @@
 
     switch($action) {
         case 'logout':
-            session_write_close();
+            if(!$_SESSION['userId']) break;
+            echo "LOGOUT ACTION";
 
             $url = "http://" . $_SERVER['SERVER_NAME'] . "/lab6/master/authenticator.php";
             $curlHandle = curl_init($url); // Get handle to curl object
@@ -50,6 +50,7 @@
             ];
             curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $postData);
 
+            session_write_close();
             curl_exec($curlHandle); // Execute curl
 
             // Output curl errors if any
