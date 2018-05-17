@@ -7,7 +7,7 @@
         <hr>
         <div class="formCenter">
             <input class="formBtn" type="submit" value="Yes">
-            <button class="formBtn"><a href="<?php echo $prevPage; ?>">No</a></button>
+            <button class="formBtn" type="button"><a href="<?php echo $prevPage; ?>">No</a></button>
 
             <input type="hidden" name="prevPage" value="<?php echo $prevPage; ?>">
             <input type="hidden" name="sender" value="logout">
