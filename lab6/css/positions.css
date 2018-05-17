@@ -78,3 +78,10 @@
 #signupForm p {
     margin:5px 0;
 }
+
+a.formBtn {
+    display:inline-block;
+    -webkit-appearance:button;
+    -moz-appearance:button;
+    appearance:button;
+}

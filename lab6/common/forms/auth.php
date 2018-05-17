@@ -17,8 +17,8 @@
         <div class="formCenter">
             <input class="formBtn" type="submit">
             <input class="formBtn" type="reset">
-            <button class="formBtn" type="button"><a href="<?php echo $prevPage; ?>">Cancel</a></button>
-            <button class="formBtn" type="button"><a href="?action=signUp">Sign Up</a></button>
+            <a class="formBtn" href="<?php echo $prevPage; ?>">Cancel</a></button>
+            <a class="formBtn" href="?action=signUp">Sign Up</a></button>
         </div>
 
         <input type="hidden" name="prevPage" value="<?php echo $prevPage; ?>">
