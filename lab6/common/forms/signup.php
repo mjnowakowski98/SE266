@@ -10,16 +10,15 @@
         <h3 class="formCenter">Sign Up</h3>
 
         <hr>
-        <label>Email: <input class="txtBox" type="text" name="email"></label>
-        <label>User ID: <input class="txtBox" type="text" name="userId"></label>
-        <label>Password: <input class="txtBox" type="text" name="pass"></label>
-        <label>Password (repeat): <input class="txtBox" type="text" name="pass2"></label>
+        <label>Email: <input class="txtBox" type="text" name="email" required></label>
+        <label>Password: <input class="txtBox" type="password" name="pass" required></label>
+        <label>Password (repeat): <input class="txtBox" type="password" name="pass2" required></label>
         <label>First name: <input class="txtBox" type="text" name="fName"></label>
         <label>Last name: <input class="txtBox" type="text" name="lName"></label>
         <p class="formCenter">Administrator:</p>
         <div class="formCenter">
-            <label><input type="radio" name="isAdmin" value="false" checked> No</label>
-            <label><input type="radio" name="isAdmin" value="true"> Yes</label>
+            <label><input type="radio" name="isAdmin" value="0" checked> No</label>
+            <label><input type="radio" name="isAdmin" value="1"> Yes</label>
         </div>
 
         <hr>

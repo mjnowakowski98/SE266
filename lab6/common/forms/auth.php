@@ -10,15 +10,15 @@
         <h3 class="formCenter">Sign In</h3>
 
         <hr>
-        <label>User ID: <input class="txtBox" type="text" name="userId"></label>
-        <label>Password: <input class="txtBox" type="text" name="pass"></label>
+        <label>Email: <input class="txtBox" type="text" name="email" required></label>
+        <label>Password: <input class="txtBox" type="password" name="pass"required></label>
 
         <hr>
         <div class="formCenter">
             <input class="formBtn" type="submit">
             <input class="formBtn" type="reset">
-            <a class="formBtn" href="<?php echo $prevPage; ?>">Cancel</a></button>
-            <a class="formBtn" href="?action=signUp">Sign Up</a></button>
+            <button class="formBtn" type="button"><a href="<?php echo $prevPage; ?>">Cancel</a></button>
+            <button class="formBtn" type="button"><a href="?action=signUp">Sign Up</a></button>
         </div>
 
         <input type="hidden" name="prevPage" value="<?php echo $prevPage; ?>">

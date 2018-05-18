@@ -1,0 +1,48 @@
+body {
+    background:url('/lab6/css/background.jpg');
+    margin:0;
+}
+
+#header {
+    background-color:#cc6633;
+
+    text-align:center;
+}
+
+#header h1{
+    margin:0;
+    padding:10px 0;
+}
+
+#nav {
+    background-color:#3333ff;
+    color:white;
+    text-align:center;
+}
+
+#nav a {
+    color:white;
+}
+
+#nav a:visited {
+    color:white;
+}
+
+#footer {
+    background-color:#3333ff;
+    color:white;
+    text-align:center;
+}
+
+#wrapper {
+    width:1367px;
+
+    margin:0 auto;
+}
+
+#content {
+    background-color:rgba(0, 0, 0, 0.5);
+    color:white;
+
+    margin:0;
+}
