@@ -26,13 +26,15 @@
 ?>
 
 <section id="header">
-    <hr>
     <h1>Trader Dan's Space Parts Emporium</h1>
-    <hr>
 </section>
 
 <section id="nav">
-    <hr>
+    <p style="display:inline">-------Filler, nav will be flushed out later-------
+        -------------------------------------------------------------------------
+        -------------------------------------------------------------------------
+    </p>
+
     <?php
         $doc = new DOMDocument();
 
@@ -70,5 +72,5 @@
 
         echo $doc->saveHTML();      
     ?>
-    <hr>
 </section>
+<hr>

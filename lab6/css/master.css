@@ -1,27 +1,39 @@
+#pageControls {
+    text-align:center;
+    margin-bottom:20px;
+}
+
 body {
     background:url('/lab6/css/background.jpg');
+    background-attachment:fixed;
     margin:0;
 }
 
 #header {
-    background-color:#cc6633;
-
     text-align:center;
+
+    padding:10px;
 }
 
 #header h1{
     margin:0;
     padding:10px 0;
+
+    font-size:30pt;
 }
 
 #nav {
-    background-color:#3333ff;
     color:white;
+
     text-align:center;
+
+    padding:10px 0;
 }
 
 #nav a {
     color:white;
+
+    font-size:14pt;
 }
 
 #nav a:visited {
@@ -29,20 +41,27 @@ body {
 }
 
 #footer {
-    background-color:#3333ff;
     color:white;
     text-align:center;
+    padding:10px 0;
 }
 
 #wrapper {
-    width:1367px;
-
-    margin:0 auto;
-}
-
-#content {
     background-color:rgba(0, 0, 0, 0.5);
     color:white;
 
+    width:90%;
+    height:100%;
+
+    margin:0 auto;
+
+    border-left:2px solid black;
+    border-right:2px solid black;
+}
+
+#content {
     margin:0;
+
+    padding-top:10px;
+    padding-bottom:10px;
 }

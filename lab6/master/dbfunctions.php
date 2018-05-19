@@ -97,4 +97,19 @@
 
         } catch(PDOException $e) { die("Failed to remove row"); }
     }
+
+    function getProductList() {
+        try {
+            global $db;
+
+            $sql  = "SELECT product_id, product, image ";
+            $sql .= "FROM `products`;";
+
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+        } catch (PDOException $e) { die("Failed to get product listings"); };
+    }
 ?>

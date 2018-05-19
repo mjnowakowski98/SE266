@@ -3,8 +3,10 @@
     <head>
         <title>Shopping Cart - Admin</title>
         <meta charset="UTF-8">
-        <link href="/lab6/css/positions.css" type="text/css" rel="stylesheet">
-        <link href="/lab6/css/colors.css" type="text/css" rel="stylesheet">
+        <link href="/lab6/css/master.css" type="text/css" rel="stylesheet">
+        <link href="/lab6/css/formparts.css" type="text/css" rel="stylesheet">
+        <link href="/lab6/css/effects.css" type="text/css" rel="stylesheet">
+        <link href="/lab6/css/displays.css" type="text/css" rel="stylesheet">
         
         <?php $isAdminPage = true; ?>
     </head>
