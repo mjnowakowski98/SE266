@@ -44,10 +44,19 @@
             $_SESSION['userId'] = $userId;
             break;
         case "signUp":
-            // TODO:
-            // Check admin -> validate admin
-            addUser($email, $passHash, $isAdmin, $fName, $lName);
-            // Switch active user
+            $verified = $_SESSION['verifiedAdmin'] ?? false;
+            if($isAdmin) {
+                if(!$verified) {
+                    header("Location: /lab6/admin/forms/validateadmin.php");
+                    exit;
+                }
+
+
+            }
+
+            addUser($email, $passHash, $verified, $fName, $lName);
+
+            // TODO:Switch active user
             break;
         case "logout":
             $_SESSION['userId'] = NULL; // Null active user

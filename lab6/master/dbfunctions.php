@@ -78,6 +78,10 @@
         } catch(PDOException $e) { die("Failed to create user"); }
     }
 
+    function enableAdmin($userId, $adminId) {
+
+    }
+
     function removeRowById($id) {
         global $db;
         try {
