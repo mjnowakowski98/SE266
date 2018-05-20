@@ -1,30 +1,3 @@
-<?php
-    session_start();
-    include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/dbfunctions.php");
-
-    $user = $_SESSION['userId'] ?? NULL;
-
-    $action = $_GET['action'] ?? NULL;
-    $prevPage = $_SERVER['PHP_SELF'];
-    $isAdminPage = $isAdminPage ?? NULL;
-
-    switch($action) {
-        case 'logout':
-            include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/logout.php");
-            break;
-        case 'signUp':
-            include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/signup.php");
-            break;
-        case 'signIn':
-            include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/auth.php");
-            break;
-        default:
-            if(!$user && $isAdminPage)
-                include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/auth.php");
-            break;
-    }
-?>
-
 <section id="header">
     <h1>Trader Dan's Space Parts Emporium</h1>
 </section>
@@ -39,7 +12,6 @@
         $doc = new DOMDocument();
 
         if($user) {
-            $userInfo = getUserInfo($user);
             echo "Welcome, " . $userInfo['first_name'] . ' ' . $userInfo['last_name'];
             $doc->appendChild($doc->createElement('br'));
 

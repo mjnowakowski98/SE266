@@ -1,3 +1,8 @@
+<?php
+    $isAdminPage = true;
+    include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/phphead.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,13 +12,11 @@
         <link href="/lab6/css/formparts.css" type="text/css" rel="stylesheet">
         <link href="/lab6/css/effects.css" type="text/css" rel="stylesheet">
         <link href="/lab6/css/displays.css" type="text/css" rel="stylesheet">
-        
-        <?php $isAdminPage = true; ?>
     </head>
     
     <body>
         <div id="wrapper">
-            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/header.php"); ?>
+            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
         
             <section id="content">
                 <a href="/lab6/index.php">Root index</a>
@@ -30,6 +33,6 @@
             </section>
         </div>
 
-        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/footer.php"); ?>
+        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/footer.php"); ?>
     </body>
 </html>

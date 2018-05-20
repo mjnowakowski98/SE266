@@ -1,3 +1,5 @@
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/phphead.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,7 +13,7 @@
 
     <body>
         <div id="wrapper">
-            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/header.php"); ?>
+            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
 
             <section id="content">
                 <form id="pageControls" action="#" method="get">
@@ -51,7 +53,7 @@
                 </section>
             </section>
 
-            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/footer.php"); ?>
+            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/footer.php"); ?>
         </div>
     </body>
 </html>

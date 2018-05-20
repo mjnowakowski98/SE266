@@ -11,6 +11,8 @@
 }
 
 #signupForm {
+    color:black;
+
     width:304px;
     height:326px;
     position:absolute;
@@ -27,6 +29,8 @@
 }
 
 #authForm {
+    color:black;
+
     width:304px;
     height:161px;
     position:absolute;
@@ -43,6 +47,8 @@
 }
 
 #logoutForm {
+    color:black;
+
     width:304px;
     height:65px;
     position:absolute;
