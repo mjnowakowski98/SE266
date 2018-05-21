@@ -78,8 +78,23 @@
         } catch(PDOException $e) { die("Failed to create user"); }
     }
 
-    function enableAdmin($userId, $adminId) {
-
+    function verifyAdmin($adminId) {
+		$allow = false;
+		
+		global $db;
+		$sql  = "SELECT admin_id, can_register ";
+		$sql .= "FROM `admins` ";
+		$sql .= "WHERE admin_id = :adminId;";
+		
+		$stmt = $db->prepare($sql);
+		$stmt->bindParam(':adminId', $adminId);
+		$stmt->execute();
+		
+		$results = $stmt->fetch(PDO::FETCH_ASSOC);
+		if($results && $results['can_register'])
+			$allow = true;
+		
+		return $allow;
     }
 
     function removeRowById($id) {

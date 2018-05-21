@@ -14,8 +14,6 @@
     $pass1 = $_POST['pass'] ?? NULL;    // signIn, signUp
     $pass2 = $_POST['pass2'] ?? NULL;   // signUp
 
-    var_dump($pass2);
-
     // Validate passwords typed correct if signUp (hacky because no JS allowed)
     if($pass1 === $pass2) $passHash = password_hash($pass1, PASSWORD_DEFAULT);
     else if($pass1 !== $pass2 && $pass2) {
@@ -34,8 +32,8 @@
             $userId = validateUser($email, $pass1);
             if(!$userId) {
                 $_SESSION['lastFormInfo'] = [
-                    'email' => $email;
-                    'guess' => $pass1;
+                    'email' => $email,
+                    'guess' => $pass1
                 ];
                 header("Location: $prevPage?action=$sender&err=login_invalid");
                 exit;
@@ -49,12 +47,13 @@
                 if(!$verified) {
                     header("Location: /lab6/admin/forms/validateadmin.php");
                     exit;
-                }
-
-
+                } else {
+					$_SESSION['verifiedAdmin'] = false;
+					echo "Test2";
+				}
             }
 
-            addUser($email, $passHash, $verified, $fName, $lName);
+            //addUser($email, $passHash, $verified, $fName, $lName);
 
             // TODO:Switch active user
             break;
