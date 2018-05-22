@@ -19,7 +19,7 @@
 
     width:304px;
     height:278px;
-    position:absolute;
+    position:fixed;
 
     top:50%;
     left:50%;
@@ -55,7 +55,7 @@
 
     width:304px;
     height:161px;
-    position:absolute;
+    position:fixed;
 
     top:50%;
     left:50%;
@@ -73,7 +73,7 @@
 
     width:304px;
     height:65px;
-    position:absolute;
+    position:fixed;
 
     top:50%;
     left:50%;

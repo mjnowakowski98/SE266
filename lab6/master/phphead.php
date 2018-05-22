@@ -12,34 +12,10 @@
     if($user) {
         $userInfo = getUserInfo($user); // If user exists get more info
 
-        // This is not the administrative page you are looking for
+        // This is not the page you are looking for
         if($isAdminPage && !$userInfo['admin_id']) {
-            header("Location: HTTP/1.1 404 Not Found");
-            exit; // Side note: The url left in the browser is shady, different from an actual RNF
+            header("Location: /lab6/index.php");
+            exit;
         }
-    }
-
-    // (Consider moving back to header.php)
-    // Setup page behavior
-    $action = $_GET['action'] ?? NULL;
-    $prevPage = $_SERVER['PHP_SELF'];
-
-    switch($action) {
-        case 'logout': // Use form to logout to post sender to /master/authenticator.php
-            include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/logout.php");
-            break;
-        case 'signUp':
-            include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/forms/signup.php");
-            break;
-        case 'adminSignUp':
-            include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/admin/forms/signup.php");
-            break;
-        case 'signIn':
-            include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/auth.php");
-            break;
-        default: // If no user logged in, no valid action and page is admin only...
-            if(!$user && $isAdminPage) // ... Show sign in
-                include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/auth.php");
-            break;
     }
 ?>

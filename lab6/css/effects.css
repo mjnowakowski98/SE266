@@ -12,12 +12,14 @@
     border-right:2px solid black;
 }
 
+#wrapper { z-index:1; }
+
 #dimmer {
     background-color:rgba(35, 35, 35, .8);
 
     margin:0;
     padding:0;
-    position:absolute;
+    position:fixed;
     width:100%;
     height:100%;;
     top:0;

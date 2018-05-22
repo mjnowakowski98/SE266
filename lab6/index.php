@@ -47,7 +47,6 @@
                         else $productList = getProductsByCategory($catId);
 
                         $doc = new DOMDocument();
-                        for($i = 0; $i < 20; $i++)
                         foreach($productList as $product) {
                             $displayLink = $doc->createElement("a");
                             $displayLink->setAttribute("href", "/lab6/productdetails.php?productId=" . $product['product_id']);
