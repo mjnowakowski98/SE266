@@ -1,0 +1,27 @@
+.cartLine h4 {
+    text-align:center;
+    margin:5px 0;
+}
+
+.cartLine p {
+    margin:2px;
+}
+
+.cartLine .left {
+    display:inline-block;
+    width:100px;
+
+    padding:5px;
+
+    border-right:2px solid white;
+}
+
+.cartLine .right {
+    display:inline-block;
+
+    vertical-align:top;
+}
+
+.cartLine img {
+    width:100px;
+}
