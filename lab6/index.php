@@ -22,12 +22,15 @@
                         <select name="catId">
                             <option selected>All</option>>
                             <?php
+                                $catId = $_GET['catId'] ?? NULL;
+
                                 $categories = getCategories();
 
                                 $doc = new DOMDocument();
                                 foreach($categories as $cat) {
                                     $option = $doc->createElement("option");
                                     $option->setAttribute("value", $cat['category_id']);
+                                    if($catId === $cat['category_id']) $option->setAttribute("selected", "true");
                                     $option->appendChild($doc->createTextNode($cat['category']));
                                     $doc->appendChild($option);
                                 }
@@ -40,8 +43,6 @@
 
                 <section class="displayRow">
                     <?php
-                        $catId = $_GET['catId'] ?? NULL;
-
                         if(!$catId) $productList = getProductList();
                         else $productList = getProductsByCategory($catId);
 
