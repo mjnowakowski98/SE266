@@ -18,7 +18,10 @@
             <section id="content">
                 <?php
                     $product = getProductInfo($_GET['productId']);
+                    $product['description'] = NULL;
+
                     if(!$product['image']) $product['image'] = "default.png";
+                    if(!$product['description']) $product['description'] = "This product has no description";
                 ?>
 
                 <div id="left">
@@ -27,7 +30,15 @@
                 </div>
 
                 <div id="right">
-                    <strong>Price: <p>$<?php echo $product['price']; ?></p></strong>
+                    <strong>Price: </strong><p>$<?php echo $product['price']; ?></p>
+                    <br>
+                    <strong>Description: </strong><p id="desc"><?php echo $product['description']; ?></p>
+
+                    <hr>
+                    <form id="cartForm" action="#" method="POST">
+                        <label>Qty: <input type="text" name="qty" value="1"></label>
+                        <button type="submit">Add to cart</button>
+                    </form>
                 </div>
             </section>
 

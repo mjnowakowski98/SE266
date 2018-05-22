@@ -30,10 +30,20 @@
     text-align:left;
 }
 
-#right p {
-    display:inline;
+#right p { display:inline; }
+
+#desc {
+    display:block;
+    height:150px;
+    overflow:auto;
 }
 
 img {
     width:200px;
 }
+
+#cartForm {
+    margin-top:5px;
+}
+
+button { color:#0b8400; }
