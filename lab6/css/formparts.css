@@ -1,3 +1,7 @@
+.floatingForm {
+    margin:0;
+}
+
 .formCenter {
     text-align:center;
     margin:0 auto;
@@ -14,14 +18,32 @@
     color:black;
 
     width:304px;
-    height:326px;
+    height:278px;
     position:absolute;
 
     top:50%;
     left:50%;
 
     margin-left:-159px;;
-    margin-top:-168px;
+    margin-top:-139px;
+
+    padding:5px;
+
+    border:2px solid black;
+}
+
+#adminSignupForm {
+    color:black;
+
+    width:304px;
+    height:317px;
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    margin-left:-159px;;
+    margin-top:-158.5px;
 
     padding:5px;
 
@@ -66,10 +88,6 @@
 
 .txtBox {
     width:300px;
-}
-
-#signupForm p {
-    margin:5px 0;
 }
 
 button a {

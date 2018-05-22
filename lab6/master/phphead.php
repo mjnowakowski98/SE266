@@ -13,7 +13,7 @@
         $userInfo = getUserInfo($user); // If user exists get more info
 
         // This is not the administrative page you are looking for
-        if($isAdminPage && !$userInfo['is_admin']) {
+        if($isAdminPage && !$userInfo['admin_id']) {
             header("Location: HTTP/1.1 404 Not Found");
             exit; // Side note: The url left in the browser is shady, different from an actual RNF
         }
@@ -29,7 +29,10 @@
             include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/logout.php");
             break;
         case 'signUp':
-            include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/signup.php");
+            include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/forms/signup.php");
+            break;
+        case 'adminSignUp':
+            include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/admin/forms/signup.php");
             break;
         case 'signIn':
             include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/auth.php");

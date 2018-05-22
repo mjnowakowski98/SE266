@@ -22,7 +22,6 @@
     }
 
     // Extended sign up info
-    $isAdmin = $_POST['isAdmin'] ?? 0; // Whether user is trying to register administrator
     $fName = $_POST['fName'] ?? NULL; // First name (optional)
     $lName = $_POST['lName'] ?? NULL; // Last Name (optional)
 
@@ -42,20 +41,13 @@
             $_SESSION['userId'] = $userId;
             break;
         case "signUp":
-            $verified = $_SESSION['verifiedAdmin'] ?? false;
-            if($isAdmin) {
-                if(!$verified) {
-                    header("Location: /lab6/admin/forms/validateadmin.php");
-                    exit;
-                } else {
-					$_SESSION['verifiedAdmin'] = false;
-					echo "Test2";
-				}
-            }
-
-            //addUser($email, $passHash, $verified, $fName, $lName);
-
-            // TODO:Switch active user
+            $userId = addUser($email, $passHash, $fName, $lName);
+            break;
+        case "adminSignUp":
+            $adminId = $_POST['employee_id'] ?? NULL;
+            if(verifyAdmin($adminId)) {
+                echo "Test";
+            } else header("Location: $prevPage?action=$sender&err=admin_id_invalid");
             break;
         case "logout":
             $_SESSION['userId'] = NULL; // Null active user

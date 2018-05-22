@@ -1,8 +1,3 @@
-<?php
-    $isAdminPage = $isAdminPage ?? NULL;
-    if($isAdminPage) $prevPage = "/lab6/index.php";
-?>
-
 <div id="dimmer"></div>
 
 <section id="authForm" class="dimmerOverlay">

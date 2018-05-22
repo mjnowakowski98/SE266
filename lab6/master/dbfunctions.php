@@ -41,7 +41,7 @@
         } catch(PDOException $e) { die("Failed to retrieve user information"); }
     }
 
-    function addUser($email, $hash, $isAdmin, $fName = NULL, $lName = NULL) {
+    function addUser($email, $hash, $fName, $lName, $adminId) {
         global $db;
         try {
             $sql  = "INSERT INTO `users` (email, password, created) ";
@@ -59,13 +59,13 @@
             $newId = $db->lastInsertId();
             $sql = '';
             $sql  = "INSERT INTO `userinfo` ";
-            $sql .= "VALUES (:id, :firstName, :lastName, :isAdmin);";
+            $sql .= "VALUES (:id, :firstName, :lastName, :adminId);";
 
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':id', $newId);
             $stmt->bindParam(':firstName', $fName);
             $stmt->bindParam(':lastName', $lName);
-            $stmt->bindParam(':isAdmin', $isAdmin);
+            $stmt->bindParam(':adminId', $adminId);
             $stmt->execute();
 
             if(!$stmt->rowCount()) {
@@ -73,7 +73,7 @@
                 die("Failed to add user information");
             }
 
-            return $stmt->rowCount();
+            return $newId;
 
         } catch(PDOException $e) { die("Failed to create user"); }
     }

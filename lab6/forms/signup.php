@@ -1,8 +1,3 @@
-<?php
-    $isAdminPage = $isAdminPage ?? NULL;
-    if($isAdminPage) $prevPage = "/lab6/index.php";
-?>
-
 <div id="dimmer"></div>
 
 <section id="signupForm" class="dimmerOverlay">
@@ -13,13 +8,8 @@
         <label>Email: <input class="txtBox" type="text" name="email" required></label>
         <label>Password: <input class="txtBox" type="password" name="pass" required></label>
         <label>Password (repeat): <input class="txtBox" type="password" name="pass2" required></label>
-        <label>First name: <input class="txtBox" type="text" name="fName"></label>
-        <label>Last name: <input class="txtBox" type="text" name="lName"></label>
-        <p class="formCenter">Administrator:</p>
-        <div class="formCenter">
-            <label><input type="radio" name="isAdmin" value="0" checked> No</label>
-            <label><input type="radio" name="isAdmin" value="1"> Yes</label>
-        </div>
+        <label>First name: <input class="txtBox" type="text" name="fName" required></label>
+        <label>Last name: <input class="txtBox" type="text" name="lName" required></label>
 
         <hr>
         <div class="formCenter">
