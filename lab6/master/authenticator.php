@@ -28,30 +28,45 @@
     // Decide authentication action based on sending form
     switch($sender) {
         case "signIn":
-            $userId = validateUser($email, $pass1);
-            if(!$userId) {
-                $_SESSION['lastFormInfo'] = [
+            $userId = validateUser($email, $pass1); // Confirm user information
+            if(!$userId) { // On fail
+                $_SESSION['lastFormInfo'] = [ // Used to re-populate form data
                     'email' => $email,
                     'guess' => $pass1
                 ];
+
+                // Return with error
                 header("Location: $prevPage?action=$sender&err=login_invalid");
                 exit;
             }
 
-            $_SESSION['userId'] = $userId;
+            // On success
+            $_SESSION['userId'] = $userId; // Set active user
             break;
         case "signUp":
-            $userId = addUser($email, $passHash, $fName, $lName);
+            // Add non-admin user, set active user
+            $userId = addUser($email, $passHash, $fName, $lName, NULL);
+            $_SESSION['userId'] = $userId;
             break;
+
         case "adminSignUp":
-            $adminId = $_POST['employee_id'] ?? NULL;
-            if(verifyAdmin($adminId)) {
-                echo "Test";
-            } else header("Location: $prevPage?action=$sender&err=admin_id_invalid");
+            $adminId = $_POST['employeeId'] ?? NULL; // Get EID from form
+            if(verifyAdmin($adminId)) { // If valid employee
+                $userId = addUser($email, $passHash, $fName, $lName, $adminId); // Add admin user
+                updateAdminStatus($adminId, $userId); // Link user to admin table, disable registration
+
+                $_SESSION['userId'] = $userId; // Set active user
+            } else {
+                // If invalid employee, return with error
+                header("Location: $prevPage?action=$sender&err=admin_id_invalid");
+                exit;
+            }
             break;
+
         case "logout":
             $_SESSION['userId'] = NULL; // Null active user
             break;
+
         default: // DEBUG
             $stopExec = true;
             break;
@@ -68,7 +83,7 @@
         return 0;
     }
 
-    // Redirect to previous page
+    // Success redirects
     if($prevPage) {
         header("Location: $prevPage?");
         exit;

@@ -15,7 +15,7 @@
             echo "Welcome, " . $userInfo['first_name'] . ' ' . $userInfo['last_name'];
             $doc->appendChild($doc->createElement('br'));
 
-            if($userInfo['is_admin']) {
+            if($userInfo['admin_id']) {
                 $adminPage = $doc->createElement('a');
                 $adminPage->appendChild($doc->createTextNode('Admin panel'));
                 $adminPage->setAttribute('href', "http://" . $_SERVER['SERVER_NAME'] . "/lab6/admin/index.php");

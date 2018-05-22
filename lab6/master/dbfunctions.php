@@ -1,6 +1,7 @@
 <?php 
     include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/dbcontroller.php");
 
+    // User functions
     function validateUser($email, $guess) {
         global $db;
         try {
@@ -52,8 +53,6 @@
             $stmt->bindParam(':hash', $hash);
             $stmt->execute();
 
-            $stmt->debugDumpParams();
-
             if(!$stmt->rowCount()) die("Cannot add user to db");
 
             $newId = $db->lastInsertId();
@@ -69,7 +68,7 @@
             $stmt->execute();
 
             if(!$stmt->rowCount()) {
-                removeRowById($newId);
+                removeUserById($newId);
                 die("Failed to add user information");
             }
 
@@ -97,7 +96,22 @@
 		return $allow;
     }
 
-    function removeRowById($id) {
+    function updateAdminStatus($adminId, $userId, $canRegister = false) {
+        global $db;
+        $sql  = "UPDATE `admins` ";
+        $sql .= "SET user_id = :userId, can_register = :canRegister ";
+        $sql .= "WHERE admin_id = :adminId;";
+
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':userId', $userId);
+        $stmt->bindParam(':adminId', $adminId);
+        $stmt->bindParam(':canRegister', $canRegister);
+        $stmt->execute();
+
+        return $stmt->rowCount();
+    }
+
+    function removeUserById($id) {
         global $db;
         try {
             $sql  = "DELETE FROM `users` WHERE user_id = :id;";
@@ -116,6 +130,8 @@
 
         } catch(PDOException $e) { die("Failed to remove row"); }
     }
+
+    // Product functions
 
     function getProductList() {
         try {
