@@ -17,25 +17,35 @@
 
             <section id="content">
 
-                <form id="pageControls" action="#" method="get">
+                <form id="pageControls" action="#" method="GET">
                     <label>Category: 
-                        <select>
-                            <option value="all">All</option>>
+                        <select name="catId">
+                            <option selected>All</option>>
                             <?php
+                                $categories = getCategories();
 
+                                $doc = new DOMDocument();
+                                foreach($categories as $cat) {
+                                    $option = $doc->createElement("option");
+                                    $option->setAttribute("value", $cat['category_id']);
+                                    $option->appendChild($doc->createTextNode($cat['category']));
+                                    $doc->appendChild($option);
+                                }
+                                echo $doc->saveHTML();
                             ?>
                         </select>
                     </label>
+                    <input type="submit">
                 </form>
 
                 <section class="displayRow">
                     <?php
-                        $productList = getProductList();
+                        $catId = $_GET['catId'] ?? NULL;
+
+                        if(!$catId) $productList = getProductList();
+                        else $productList = getProductsByCategory($catId);
 
                         $doc = new DOMDocument();
-
-                        for($i = 0; $i < 13; $i++) {
-
                         foreach($productList as $product) {
                             $newDisplay = $doc->createElement("div");
                             $newDisplay->setAttribute("class", "productDisplay");
@@ -52,9 +62,6 @@
                             $newTitle->appendChild($doc->createTextNode($product['product']));
                             $newDisplay->appendChild($newTitle);
                         }
-
-                        }
-
                         echo $doc->saveHTML();
                     ?>
                 </section>

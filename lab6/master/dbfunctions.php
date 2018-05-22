@@ -95,6 +95,7 @@
 		    	$allow = true;
             
             return $allow;
+
         } catch(PDOException $e) { die("Failed to verify admin status"); }
     }
 
@@ -112,6 +113,7 @@
             $stmt->execute();
 
             return $stmt->rowCount();
+
         } catch(PDOException $e) { die("Failed setting admin status"); }
     }
 
@@ -144,22 +146,29 @@
             $sql .= "FROM `categories`;";
 
             $stmt = $db->prepare($sql);
-            $stmt->execute():
+            $stmt->execute();
 
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
             return $results;
 
         } catch(PDOException $e) { die("Failed to get category list"); }
     }
 
-    function getProductsByCategories($catId) {
+    function getProductsByCategory($catId) {
         try {
             global $db;
 
             $sql  = "SELECT product_id, product, image ";
             $sql .= "FROM `products` ";
             $sql .= "WHERE category_id = :catId;";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':catId', $catId);
+            $stmt->execute();
+
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+
         } catch(PDOException $e) { die("Failed to get category products"); }
     }
 
@@ -176,6 +185,7 @@
 
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $results;
+
         } catch (PDOException $e) { die("Failed to get product listings"); };
     }
 ?>
