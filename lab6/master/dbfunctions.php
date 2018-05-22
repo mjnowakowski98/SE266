@@ -188,4 +188,21 @@
 
         } catch (PDOException $e) { die("Failed to get product listings"); };
     }
+
+    function getProductInfo($productId) {
+        try {
+            global $db;
+
+            $sql  = "SELECT * ";
+            $sql .= "FROM `products` ";
+            $sql .= "WHERE product_id = :productId;";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':productId', $productId);
+            $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+
+        } catch(PDOException $e) { die("Failed to get product information"); }
+    }
 ?>

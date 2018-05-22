@@ -1,0 +1,39 @@
+/*This was rushed, css can be strange sometimes*/
+
+#content { text-align:center; }
+
+#left {
+    display:inline-block;
+
+    width:300px;
+    height:270px;
+
+    margin:0 auto;
+
+    text-align:center;
+
+    border-right:2px solid white;
+}
+
+#left h2 { margin-top:0; }
+
+#right {
+    display:inline-block;
+    vertical-align:top;
+
+    width:300px;
+    height:270px;
+
+    margin:5px auto 0 auto;
+    padding-left:2px;
+
+    text-align:left;
+}
+
+#right p {
+    display:inline;
+}
+
+img {
+    width:200px;
+}

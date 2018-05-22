@@ -16,13 +16,12 @@
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
 
             <section id="content">
-
                 <form id="pageControls" action="#" method="GET">
                     <label>Category: 
                         <select name="catId">
                             <option selected>All</option>>
                             <?php
-                                $catId = $_GET['catId'] ?? NULL;
+                                $catId = $_GET['catId'] ?? 'All';
 
                                 $categories = getCategories();
 
@@ -43,25 +42,31 @@
 
                 <section class="displayRow">
                     <?php
-                        if(!$catId) $productList = getProductList();
+                        if($catId === 'All') $productList = getProductList();
                         else $productList = getProductsByCategory($catId);
 
                         $doc = new DOMDocument();
                         foreach($productList as $product) {
-                            $newDisplay = $doc->createElement("div");
-                            $newDisplay->setAttribute("class", "productDisplay");
-                            $doc->appendChild($newDisplay);
+                            $displayLink = $doc->createElement("a");
+                            $displayLink->setAttribute("href", "/lab6/productdetails.php?productId=" . $product['product_id']);
+                            $doc->appendChild($displayLink);
+
+                            $display = $doc->createElement("div");
+                            $display->setAttribute("class", "productDisplay");
+                            $displayLink->appendChild($display);
 
                             $img = $doc->createElement("img");
                             if(!$product['image'])
                                 $img->setAttribute("src", "/lab6/images/default.png");
                             else $img->setAttribute("src", "/lab6/images/" . $product['image']);
 
-                            $newDisplay->appendChild($img);
+                            $display->appendChild($img);
+
+                            $display->appendChild($doc->createElement("hr"));
 
                             $newTitle = $doc->createElement("p");
                             $newTitle->appendChild($doc->createTextNode($product['product']));
-                            $newDisplay->appendChild($newTitle);
+                            $display->appendChild($newTitle);
                         }
                         echo $doc->saveHTML();
                     ?>
