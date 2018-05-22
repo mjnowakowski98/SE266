@@ -1,3 +1,7 @@
+<?php
+    $email = $_SESSION['lastFormInfo']['email'] ?? NULL;
+?>
+
 <div id="dimmer"></div>
 
 <section id="authForm" class="dimmerOverlay">
@@ -5,7 +9,7 @@
         <h3 class="formCenter">Sign In</h3>
 
         <hr>
-        <label>Email: <input class="txtBox" type="text" name="email" required></label>
+        <label>Email: <input class="txtBox" type="text" name="email" value="<?php echo $email; ?>" required></label>
         <label>Password: <input class="txtBox" type="password" name="pass"required></label>
 
         <hr>

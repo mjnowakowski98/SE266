@@ -78,37 +78,41 @@
     }
 
     function verifyAdmin($adminId) {
-		$allow = false;
-		
-		global $db;
-		$sql  = "SELECT admin_id, can_register ";
-		$sql .= "FROM `admins` ";
-		$sql .= "WHERE admin_id = :adminId;";
-		
-		$stmt = $db->prepare($sql);
-		$stmt->bindParam(':adminId', $adminId);
-		$stmt->execute();
-		
-		$results = $stmt->fetch(PDO::FETCH_ASSOC);
-		if($results && $results['can_register'])
-			$allow = true;
-		
-		return $allow;
+        try {
+		    $allow = false;
+            
+		    global $db;
+		    $sql  = "SELECT admin_id, can_register ";
+		    $sql .= "FROM `admins` ";
+		    $sql .= "WHERE admin_id = :adminId;";
+            
+		    $stmt = $db->prepare($sql);
+		    $stmt->bindParam(':adminId', $adminId);
+		    $stmt->execute();
+            
+		    $results = $stmt->fetch(PDO::FETCH_ASSOC);
+		    if($results && $results['can_register'])
+		    	$allow = true;
+            
+            return $allow;
+        } catch(PDOException $e) { die("Failed to verify admin status"); }
     }
 
     function updateAdminStatus($adminId, $userId, $canRegister = false) {
-        global $db;
-        $sql  = "UPDATE `admins` ";
-        $sql .= "SET user_id = :userId, can_register = :canRegister ";
-        $sql .= "WHERE admin_id = :adminId;";
+        try {
+            global $db;
+            $sql  = "UPDATE `admins` ";
+            $sql .= "SET user_id = :userId, can_register = :canRegister ";
+            $sql .= "WHERE admin_id = :adminId;";
 
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':userId', $userId);
-        $stmt->bindParam(':adminId', $adminId);
-        $stmt->bindParam(':canRegister', $canRegister);
-        $stmt->execute();
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':userId', $userId);
+            $stmt->bindParam(':adminId', $adminId);
+            $stmt->bindParam(':canRegister', $canRegister);
+            $stmt->execute();
 
-        return $stmt->rowCount();
+            return $stmt->rowCount();
+        } catch(PDOException $e) { die("Failed setting admin status"); }
     }
 
     function removeUserById($id) {
@@ -132,6 +136,33 @@
     }
 
     // Product functions
+    function getCategories() {
+        try {
+            global $db;
+
+            $sql  = "SELECT category_id, category ";
+            $sql .= "FROM `categories`;";
+
+            $stmt = $db->prepare($sql);
+            $stmt->execute():
+
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $results;
+
+        } catch(PDOException $e) { die("Failed to get category list"); }
+    }
+
+    function getProductsByCategories($catId) {
+        try {
+            global $db;
+
+            $sql  = "SELECT product_id, product, image ";
+            $sql .= "FROM `products` ";
+            $sql .= "WHERE category_id = :catId;";
+        } catch(PDOException $e) { die("Failed to get category products"); }
+    }
+
 
     function getProductList() {
         try {

@@ -22,19 +22,20 @@
     }
 
     // Extended sign up info
-    $fName = $_POST['fName'] ?? NULL; // First name (optional)
-    $lName = $_POST['lName'] ?? NULL; // Last Name (optional)
+    $fName = $_POST['fName'] ?? NULL; // First name
+    $lName = $_POST['lName'] ?? NULL; // Last Name
+
+    $_SESSION['lastFormInfo'] = [ // Used to re-populate form data
+        'email' => $email,
+        'fName' => $fName,
+        'lName' => $lName
+    ];
 
     // Decide authentication action based on sending form
     switch($sender) {
         case "signIn":
             $userId = validateUser($email, $pass1); // Confirm user information
-            if(!$userId) { // On fail
-                $_SESSION['lastFormInfo'] = [ // Used to re-populate form data
-                    'email' => $email,
-                    'guess' => $pass1
-                ];
-
+            if(!$userId) { // On fail, return with error
                 // Return with error
                 header("Location: $prevPage?action=$sender&err=login_invalid");
                 exit;

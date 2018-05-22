@@ -1,3 +1,9 @@
+<?php
+    $email = $_SESSION['lastFormInfo']['email'] ?? NULL;
+    $fName = $_SESSION['lastFormInfo']['fName'] ?? NULL;
+    $lName = $_SESSION['lastFormInfo']['lName'] ?? NULL;
+?>
+
 <div id="dimmer"></div>
 
 <section id="adminSignupForm" class="dimmerOverlay">
@@ -6,11 +12,11 @@
 
         <hr>
 		<label>EID: <input class="txtBox" type="text" name="employeeId" required></label>
-        <label>Email: <input class="txtBox" type="text" name="email" required></label>
+        <label>Email: <input class="txtBox" type="text" name="email" value="<?php echo $email ?>" required></label>
         <label>Password: <input class="txtBox" type="password" name="pass" required></label>
         <label>Password (repeat): <input class="txtBox" type="password" name="pass2" required></label>
-        <label>First name: <input class="txtBox" type="text" name="fName" required></label>
-        <label>Last name: <input class="txtBox" type="text" name="lName" required></label>
+        <label>First name: <input class="txtBox" type="text" name="fName" value="<?php echo $fName ?>" required></label>
+        <label>Last name: <input class="txtBox" type="text" name="lName" value="<?php echo $lName ?>" required></label>
 
         <hr>
         <div class="formCenter">

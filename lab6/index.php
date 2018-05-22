@@ -16,9 +16,16 @@
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
 
             <section id="content">
+
                 <form id="pageControls" action="#" method="get">
-                    <label>Search/sort controls (NYI): <input type="text"></label>
-                    <input type="submit">
+                    <label>Category: 
+                        <select>
+                            <option value="all">All</option>>
+                            <?php
+
+                            ?>
+                        </select>
+                    </label>
                 </form>
 
                 <section class="displayRow">
