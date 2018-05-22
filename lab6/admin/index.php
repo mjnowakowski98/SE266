@@ -15,6 +15,7 @@
     </head>
     
     <body>
+        <div id="background"></div>
         <div id="wrapper">
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
         
@@ -31,8 +32,9 @@
                 <p>Cu vel maiorum constituto, denique delectus duo ei. Choro veniam laoreet his cu, molestie nominati an sit. No sonet fabellas his, ne fugit complectitur pro, duis brute senserit ex pro. Eu vel fierent urbanitas intellegat, latine blandit eleifend id vis, ea euismod legimus sea. Vim ea iusto ornatus impedit, ius ea eros zril fabellas. Nec fabulas dolores blandit no, eam cu feugiat dissentiunt.</p>
                 <p>Alienum suscipiantur ex vim, ne perpetua assentior adversarium mel. In reque voluptatum sadipscing eam, mei veritus facilis pertinax ne, duis graecis evertitur est no. Cu pro tota dicta saperet. At facilis imperdiet vis, mei elit menandri volutpat et. Ne eam posse vitae.</p>
             </section>
-        </div>
 
         <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/footer.php"); ?>
+        
+        </div>
     </body>
 </html>

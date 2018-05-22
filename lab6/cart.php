@@ -1,4 +1,8 @@
-<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/phphead.php"); ?>
+<?php
+    include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/phphead.php");
+
+    if(!$_SESSION['userId']) include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/auth.php");
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,11 +16,12 @@
     </head>
 
     <body>
+        <div id="background"></div>
         <div id="wrapper">
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
 
             <section id="content">
-                
+
             </section>
 
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/footer.php"); ?>

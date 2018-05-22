@@ -3,11 +3,6 @@
 </section>
 
 <section id="nav">
-    <p style="display:inline">-------Filler, nav will be flushed out later-------
-        -------------------------------------------------------------------------
-        -------------------------------------------------------------------------
-    </p>
-
     <?php
         $doc = new DOMDocument();
 

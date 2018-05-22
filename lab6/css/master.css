@@ -7,6 +7,8 @@ body {
     background:url('/lab6/css/background.jpg');
     background-attachment:fixed;
     margin:0;
+
+    overflow:auto;
 }
 
 #header {
@@ -47,21 +49,19 @@ body {
 }
 
 #wrapper {
-    background-color:rgba(0, 0, 0, 0.5);
+    position:relative;
+    z-index:1;
     color:white;
+    
 
     width:90%;
     height:100%;
 
     margin:0 auto;
-
-    border-left:2px solid black;
-    border-right:2px solid black;
 }
 
 #content {
     margin:0;
 
-    padding-top:10px;
-    padding-bottom:10px;
+    padding:10px 5px;
 }

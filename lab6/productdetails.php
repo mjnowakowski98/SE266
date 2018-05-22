@@ -12,6 +12,7 @@
     </head>
 
     <body>
+        <div id="background"></div>
         <div id="wrapper">
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
 
