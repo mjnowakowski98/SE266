@@ -1,4 +1,4 @@
-/*This was rushed, css can be strange sometimes*/
+/* This was rushed, css can be strange sometimes */
 
 #content { text-align:center; }
 
@@ -32,9 +32,13 @@
 
 #right p { display:inline; }
 
-#desc {
+#right p#desc {
     display:block;
+    width:300px;
     height:150px;
+
+    margin:0;
+
     overflow:auto;
 }
 
@@ -47,3 +51,5 @@ img {
 }
 
 button { color:#0b8400; }
+
+#qty { width:35px; }

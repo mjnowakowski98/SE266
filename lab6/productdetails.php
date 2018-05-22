@@ -35,8 +35,8 @@
                     <strong>Description: </strong><p id="desc"><?php echo $product['description']; ?></p>
 
                     <hr>
-                    <form id="cartForm" action="#" method="POST">
-                        <label>Qty: <input type="text" name="qty" value="1"></label>
+                    <form id="cartForm" action="/lab6/cart.php" method="POST">
+                        <label>Qty: <input id="qty" type="number" name="qty" value="1"></label>
                         <button type="submit">Add to cart</button>
                     </form>
                 </div>
