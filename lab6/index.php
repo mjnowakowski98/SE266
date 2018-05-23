@@ -3,16 +3,19 @@
 /*
 TODO:
     Clean CSS/Page Formatting
-    Add admin view orders
-    Add customer view orders
     Add admin update products
     Add product search (Cust/admin)
     Add product sort (Cust/admin)
     Redirect admin to admin/index on login
     add some more categories/products
     remove notice on file upload*
-    require signin on cart
-    clear cart on checkout
+    Add total price to cart
+    Restrict order detail view to admin/current user
+    Restrict admins from buying items
+
+    // requires dropping tables
+    Add date created to orders
+    Add price_at_checkout to orderinfo
 */
 ?>
 

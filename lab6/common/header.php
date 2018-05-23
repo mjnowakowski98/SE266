@@ -48,6 +48,10 @@
 
         $doc->appendChild($doc->createTextNode(' | '));
 
+        if($_SERVER['QUERY_STRING'])
+            $oldQS = '&' . $_SERVER['QUERY_STRING'];
+        else $oldQS = NULL;
+
         if($user) {
             if($userInfo['admin_id']) {
                 $adminPage = $doc->createElement('a');
@@ -67,19 +71,19 @@
 
             $logout = $doc->createElement("a");
             $logout->appendChild($doc->createTextNode("Logout"));
-            $logout->setAttribute("href", "?action=logout");
+            $logout->setAttribute("href", "?action=logout" . $oldQS);
             $doc->appendChild($logout);
         } else {
             $signIn = $doc->createElement("a");
             $signIn->appendChild($doc->createTextNode("Sign In"));
-            $signIn->setAttribute("href", "?action=signIn");
+            $signIn->setAttribute("href", "?action=signIn" . $oldQS);
             $doc->appendChild($signIn);
 
             $doc->appendChild($doc->createTextNode(' | '));
 
             $signUp = $doc->createElement("a");
             $signUp->appendChild($doc->createTextNode("Sign Up"));
-            $signUp->setAttribute("href", "?action=signUp");
+            $signUp->setAttribute("href", "?action=signUp" . $oldQS);
             $doc->appendChild($signUp);
         }
 

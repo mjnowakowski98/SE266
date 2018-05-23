@@ -137,7 +137,9 @@
         } catch(PDOException $e) { die("Failed to remove row"); }
     }
 
-    function checkout($cart) {
+    // Order functions
+
+    function checkout($cart, $userId) {
         try {
             global $db;
 
@@ -145,7 +147,7 @@
             $sql .= "VALUES(:userId);";
 
             $stmt = $db->prepare($sql);
-            $stmt->bindParam(':userId', $_SESSION['userId']);
+            $stmt->bindParam(':userId', $userId);
             $stmt->execute();
 
             if(!$stmt->rowCount()) die("Failed adding order (1)");
@@ -169,7 +171,45 @@
         } catch(PDOException $e) { die("Failed to checkout, sorry 'bout that (not really)"); }
     }
 
+    function getOrders($userId = NULL) {
+        try {
+            global $db;
+
+            $sql  = "SELECT order_id, user_id ";
+            $sql .= "FROM orders`";
+            if($userId) $sql .= " WHERE user_id = :userId";
+            $sql .= ';';
+
+            $stmt = $db->prepare($sql);
+            if($userId) $stmt->bindParam(':userId', $userId);
+            $stmt->execute();
+
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+
+        } catch(PDOException $e) {die("Failed to retrieve order list"); }
+    }
+
+    function getOrderLines($orderId) {
+        try {
+            global $db;
+
+            $sql  = "SELECT product_id, qty ";
+            $sql .= "FROM `orderitems` ";
+            $sql .= "WHERE order_id = :orderId;";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':orderId', $orderId);
+            $stmt->execute();
+
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+
+        }catch(PDOException $e) { die("Failed to get order information"); }
+    }
+
     // Product functions (consider moving to seperate file)
+
     function getCategories() {
         try {
             global $db;

@@ -2,7 +2,6 @@
     // Some debug functions
     $stopExec = $_GET['debug'] ?? false;
 
-    session_start();
     include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/dbfunctions.php");
 
     // Get sending page info
@@ -85,6 +84,17 @@
     }
 
     // Success redirects
+    // header calls must be done before any HTML is output, even doctype
+    $user = $_SESSION['userId'] ?? NULL;
+    if($user) {
+        $userInfo = getUserinfo($user);
+
+        if($userInfo['admin_id']) {
+            header("Location: /lab6/admin/index.php");
+            exit;
+        }
+    }
+
     if($prevPage) {
         header("Location: $prevPage?");
         exit;

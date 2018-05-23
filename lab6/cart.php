@@ -54,12 +54,16 @@
                         break;
 
                     case 'Checkout':
-                        checkout($cart);
+                        if(!$user) {
+                            include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/auth.php");
+                            break;
+                        }
+                        checkout($cart, $user);
+                        $cart = array();
                         break;
 
                     case 'Clear':
                         $cart = array();
-                        $_SESSION['cart'] = NULL;
                         break;
 
                     default:

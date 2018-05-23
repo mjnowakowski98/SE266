@@ -19,10 +19,10 @@
         <div id="wrapper">
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
         
-            <section id="content">
-                <!-- tmp -->
+            <section id="content" class="formCenter">
                 <a href="/lab6/admin/categories.php">Category Management</a> |
-                <a href="/lab6/admin/products.php">Product Management</a>
+                <a href="/lab6/admin/products.php">Product Management</a> |
+                <a href="/lab6/common/vieworders.php">Order Managment</a>
             </section>
 
         <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/footer.php"); ?>
