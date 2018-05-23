@@ -222,6 +222,24 @@
         } catch(PDOException $e) { die("Failed to add category"); }
     }
 
+    function updateCategory($catId, $catName) {
+        try {
+            global $db;
+
+            $sql  = "UPDATE `categories` ";
+            $sql .= "SET category = :catName ";
+            $sql .= "WHERE category_id = :catId;";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam('catId', $catId);
+            $stmt->bindParam(':catName', $catName);
+            $stmt->execute();
+
+            return $stmt->rowCount();
+
+        } catch(PDOException $e) { die("Failed to update category"); }
+    }
+
     function addProduct($prodName, $price, $image, $categoryId) {
         try {
             global $db;

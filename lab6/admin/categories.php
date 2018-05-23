@@ -22,15 +22,71 @@
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
 
             <?php
+                $catAction = $_GET['catAction'] ?? NULL;
+                $catId = $_GET['catId'] ?? NULL;
                 $catName = $_GET['catName'] ?? NULL;
-                if($catName) addCategory($catName);
+
+                $update = false;
+
+                switch($catAction) {
+                    case 'Add':
+                        addCategory($catName);
+                        break;
+                    case 'Update':
+                        $update = true;
+                        break;
+                    case 'sendUpdate':
+                        var_dump(updateCategory($catId, $catName));
+                        break;
+                    case 'Delete':
+                        break;
+                }
             ?>
         
             <section id="content">
+                <h3><?php
+                    if(!$update) echo 'Create New Category';
+                    else echo "Update Category with id: $catId";
+                ?></h3>
                 <form action="#" method="GET">
-                    <label>Name: <input type="text" name="catName"></label>
+                    <input type="hidden" name="catId" value="<?php echo $catId; ?>">
+                    <input type="hidden" name="catAction" value="<?php
+                    if($update) echo 'sendUpdate'; else echo 'Add'?>">
+                    <label>Name: <input type="text" name="catName" required></label>
                     <input type="submit">
                 </form>
+
+                <h3>Existing Categories:</h3>
+
+                <?php
+                    $categories = getCategories();
+                    $doc = new DOMDocument();
+                    foreach($categories as $cat) {
+                        $div = $doc->createElement("div");
+                        $doc->appendChild($div);
+
+                        $viewLink = $doc->createElement("a");
+                        $viewLink->setAttribute("href", "/lab6/index.php?catId=" . $cat['category_id']);
+                        $viewLink->appendChild($doc->createTextNode($cat['category']));
+                        $div->appendChild($viewLink);
+
+                        $div->appendChild($doc->createTextNode(' | '));
+
+                        $updateLink = $doc->createElement("a");
+                        $updateLink->setAttribute("href", "?catAction=Update&catId=" . $cat['category_id']);
+                        $updateLink->appendChild($doc->createTextNode("Update"));
+                        $div->appendChild($updateLink);
+
+                        $div->appendChild($doc->createTextNode(' | '));
+
+                        $deleteLink = $doc->createElement("a");
+                        $deleteLink->setAttribute("href", "?catAction=Delete&catId=" . $cat['category_id']);
+                        $deleteLink->appendChild($doc->createTextNode("Delete"));
+                        $div->appendChild($deleteLink);
+                    }
+
+                    echo $doc->saveHTML();
+                ?>
             </section>
 
         <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/footer.php"); ?>

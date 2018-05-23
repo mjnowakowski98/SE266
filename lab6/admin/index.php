@@ -21,8 +21,8 @@
         
             <section id="content">
                 <!-- tmp -->
-                <a href="/lab6/admin/categories.php">Add cat</a> |
-                <a href="/lab6/admin/products.php">Add prod</a>
+                <a href="/lab6/admin/categories.php">Category Management</a> |
+                <a href="/lab6/admin/products.php">Product Management</a>
             </section>
 
         <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/footer.php"); ?>
