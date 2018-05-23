@@ -137,7 +137,7 @@
         } catch(PDOException $e) { die("Failed to remove row"); }
     }
 
-    // Product functions
+    // Product functions (consider moving to seperate file)
     function getCategories() {
         try {
             global $db;
@@ -204,5 +204,39 @@
             return $stmt->fetch(PDO::FETCH_ASSOC);
 
         } catch(PDOException $e) { die("Failed to get product information"); }
+    }
+
+    function addCategory($catName) {
+        try {
+            global $db;
+
+            $sql  = "INSERT INTO `categories` (category) ";
+            $sql .= "VALUES (:catName);";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':catName', $catName);
+            $stmt->execute();
+
+            return $stmt->rowCount();
+
+        } catch(PDOException $e) { die("Failed to add category"); }
+    }
+
+    function addProduct($prodName, $price, $image, $categoryId) {
+        try {
+            global $db;
+
+            $sql  = "INSERT INTO `products` (product, price, image, category_id) ";
+            $sql .= "VALUES (:prodName, :price, :image, :categoryId);";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':prodName', $prodName);
+            $stmt->bindParam(':price', $price);
+            $stmt->bindParam(':image', $image);
+            $stmt->bindParam(':categoryId', $categoryId);
+            $stmt->execute();
+
+            return $stmt->rowCount();
+        } catch(PDOException $e) { die("Failed to add product"); }
     }
 ?>

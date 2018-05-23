@@ -3,6 +3,8 @@
     include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/phphead.php");
 ?>
 
+<!-- TODO: Make this look fancy -->
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -18,11 +20,17 @@
         <div id="background"></div>
         <div id="wrapper">
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
+
+            <?php
+                $catName = $_GET['catName'] ?? NULL;
+                if($catName) addCategory($catName);
+            ?>
         
             <section id="content">
-                <!-- tmp -->
-                <a href="/lab6/admin/categories.php">Add cat</a> |
-                <a href="/lab6/admin/products.php">Add prod</a>
+                <form action="#" method="GET">
+                    <label>Name: <input type="text" name="catName"></label>
+                    <input type="submit">
+                </form>
             </section>
 
         <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/footer.php"); ?>
