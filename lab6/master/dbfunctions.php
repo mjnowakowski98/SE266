@@ -254,6 +254,8 @@
             $stmt->bindParam(':categoryId', $categoryId);
             $stmt->execute();
 
+            $stmt->debugDumpParams();
+
             return $stmt->rowCount();
         } catch(PDOException $e) { die("Failed to add product"); }
     }

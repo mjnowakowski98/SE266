@@ -40,6 +40,8 @@
                         break;
                     case 'Delete':
                         break;
+                    default:
+                        break;
                 }
             ?>
         
@@ -67,7 +69,7 @@
 
                         $viewLink = $doc->createElement("a");
                         $viewLink->setAttribute("href", "/lab6/index.php?catId=" . $cat['category_id']);
-                        $viewLink->appendChild($doc->createTextNode($cat['category']));
+                        $viewLink->appendChild($doc->createTextNode($cat['category_id'] . ", " . $cat['category']));
                         $div->appendChild($viewLink);
 
                         $div->appendChild($doc->createTextNode(' | '));
