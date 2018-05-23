@@ -137,6 +137,40 @@
         } catch(PDOException $e) { die("Failed to remove row"); }
     }
 
+    function checkout($cart) {
+        try {
+            global $db;
+
+            $sql  = "INSERT INTO `orders` (user_id) ";
+            $sql .= "VALUES(:userId);";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':userId', $_SESSION['userId']);
+            $stmt->execute();
+
+            $stmt->debugDumpParams();
+
+            if(!$stmt->rowCount()) die("Failed adding order (1)");
+            $orderId = $db->lastInsertId();
+
+            foreach($cart as $line) {
+                $sql  = "INSERT INTO `orderitems` (order_id, product_id, qty) ";
+                $sql .= "VALUES(:orderId, :productId, :qty);";
+
+                $stmt = $db->prepare($sql);
+                $stmt->bindParam(':orderId', $orderId);
+                $stmt->bindParam(':productId', $line['productId']);
+                $stmt->bindParam(':qty', $line['qty']);
+                $stmt->execute();
+
+                if(!$stmt->rowCount()) echo "Warning: failed to add item";
+            }
+
+            return $stmt->rowCount();
+
+        } catch(PDOException $e) { die("Failed to checkout, sorry 'bout that (not really)"); }
+    }
+
     // Product functions (consider moving to seperate file)
     function getCategories() {
         try {

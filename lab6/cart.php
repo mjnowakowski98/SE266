@@ -39,15 +39,34 @@
                                 'qty' => $qty
                             ];
                         }
-                        $_SESSION['cart'] = $cart;
                         break;
+
+                    case 'Remove': // item2 named so because item causes issues, thanks php
+                        $count = 0;
+                        foreach($cart as $item2) {
+                            if($item2['productId'] === $productId) {
+                                unset($cart[$count]);
+                                break;
+                            }
+
+                            $count++;
+                        }
+                        break;
+
+                    case 'Checkout':
+                        checkout($cart);
+                        break;
+
                     case 'Clear':
                         $cart = array();
                         $_SESSION['cart'] = NULL;
                         break;
+
                     default:
                         break;
                 }
+
+                $_SESSION['cart'] = $cart;
 
                 session_write_close();
             ?>
@@ -81,8 +100,12 @@
                         $container->appendChild($rightDiv);
 
                         $priceOut = $doc->createElement("p");
-                        $priceOut->appendChild($doc->createTextNode($productInfo['price']));
+                        $priceOut->appendChild($doc->createTextNode('$' . $productInfo['price']));
                         $rightDiv->appendChild($priceOut);
+
+                        $qtyOut = $doc->createElement("p");
+                        $qtyOut->appendChild($doc->createTextNode('Qty: ' . $line['qty']));
+                        $rightDiv->appendChild($qtyOut);
 
                         $detailBtn = $doc->createElement("button");
                         $detailBtn->setAttribute("class", "formBtn");
