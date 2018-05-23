@@ -148,8 +148,6 @@
             $stmt->bindParam(':userId', $_SESSION['userId']);
             $stmt->execute();
 
-            $stmt->debugDumpParams();
-
             if(!$stmt->rowCount()) die("Failed adding order (1)");
             $orderId = $db->lastInsertId();
 

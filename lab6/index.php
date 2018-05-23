@@ -1,4 +1,20 @@
-<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/phphead.php"); ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/phphead.php");
+
+/*
+TODO:
+    Clean CSS/Page Formatting
+    Add admin view orders
+    Add customer view orders
+    Add admin update products
+    Add product search (Cust/admin)
+    Add product sort (Cust/admin)
+    Redirect admin to admin/index on login
+    add some more categories/products
+    remove notice on file upload*
+    require signin on cart
+    clear cart on checkout
+*/
+?>
 
 <!DOCTYPE html>
 <html lang="en">
