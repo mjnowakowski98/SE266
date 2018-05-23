@@ -1,15 +1,24 @@
-.cartLine h4 {
+/*
+    TODO: Clean CSS format, all files
+*/
+
+h4 {
+    margin:5px 0;
+}
+
+.cartLine {
     text-align:center;
+    height:162px;
     margin:5px 0;
 }
 
 .cartLine p {
-    margin:2px;
+    margin:5px 0;
 }
 
 .cartLine .left {
     display:inline-block;
-    width:100px;
+    width:120px;
 
     padding:5px;
 
@@ -20,8 +29,16 @@
     display:inline-block;
 
     vertical-align:top;
+
+    /*edit this on complete form*/
+    margin-top:20px;
 }
 
 .cartLine img {
-    width:100px;
+    width:120px;
+}
+
+.formBtn {
+    display:block;
+    margin:2px 0;
 }
