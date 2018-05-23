@@ -17,48 +17,47 @@
         <div id="wrapper">
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
 
+            <?php
+                $cart = $_SESSION['cart'] ?? array();
+                $productId = $_GET['productId'] ?? NULL;
+                $qty = $_GET['qty'] ?? NULL;
+                $qty = intval($qty);
+                $cartAction = $_GET['cartAction'] ?? NULL;
+                switch($cartAction) {
+                    case 'Add':
+                        $inCart = false;
+                        foreach($cart as &$item) {
+                            if($item['productId'] === $productId) {
+                                $item['qty'] += $qty;
+                                $inCart = true;
+                                break;
+                            }
+                        }
+                        if(!$inCart) {
+                            $cart[] = [
+                                'productId' => $productId,
+                                'qty' => $qty
+                            ];
+                        }
+                        $_SESSION['cart'] = $cart;
+                        break;
+                    case 'Clear':
+                        $cart = array();
+                        $_SESSION['cart'] = NULL;
+                        break;
+                    default:
+                        break;
+                }
+
+                session_write_close();
+            ?>
+
             <section id="content">
-                <?php
-                    $cart = $_SESSION['cart'] ?? array();
-                    $productId = $_GET['productId'] ?? NULL;
-                    $qty = $_GET['qty'] ?? NULL;
-                    $qty = intval($qty);
-
-                    $cartAction = $_GET['cartAction'] ?? NULL;
-                    switch($cartAction) {
-                        case 'Add':
-                            $inCart = false;
-                            foreach($cart as &$item) {
-                                if($item['productId'] === $productId) {
-                                    $item['qty'] += $qty;
-                                    $inCart = true;
-                                }
-                            }
-
-                            if(!$inCart) {
-                                $cart[] = [
-                                    'productId' => $productId,
-                                    'qty' => $qty
-                                ];
-                            }
-                            $_SESSION['cart'] = $cart;
-                            break;
-                        case 'Clear':
-                            $_SESSION['cart'] = NULL;
-                            break;
-                        default:
-                            break;
-                    }
-                    
-                ?>
-
-                <h2>Shopping Cart</h2>
+                <h2>Your Cart</h2>
                 <?php
                     $doc = new DOMDocument();
-
-                    $count = 0;
-                    foreach($cart as $item) {
-                        $productInfo = getProductInfo($item['productId']);
+                    foreach($cart as $line) {
+                        $productInfo = getProductInfo($line['productId']);
                         if(!$productInfo['image']) $productInfo['image'] = "default.png";
 
                         $container = $doc->createElement("div");
@@ -85,25 +84,32 @@
                         $priceOut->appendChild($doc->createTextNode($productInfo['price']));
                         $rightDiv->appendChild($priceOut);
 
+                        $detailBtn = $doc->createElement("button");
+                        $detailBtn->setAttribute("class", "formBtn");
+                        $detailBtn->setAttribute("type", "button");
+                        $rightDiv->appendChild($detailBtn);
+
+                        $detailLink = $doc->createElement("a");
+                        $detailLink->setAttribute("href", "/lab6/productdetails.php?productId=" . $line['productId']);
+                        $detailLink->appendChild($doc->createTextNode("Details"));
+                        $detailBtn->appendChild($detailLink);
+
                         $removeBtn = $doc->createElement("button");
                         $removeBtn->setAttribute("class", "formBtn");
                         $removeBtn->setAttribute("type", "button");
                         $rightDiv->appendChild($removeBtn);
 
                         $removeLink = $doc->createElement("a");
-                        $removeLink->setAttribute("href", "/lab6/cart.php?cartAction=Remove&productId=" . $productInfo['product_id']);
+                        $removeLink->setAttribute("href", "?cartAction=Remove&productId=" . $line['productId']);
                         $removeLink->appendChild($doc->createTextNode("Remove"));
                         $removeBtn->appendChild($removeLink);
-
-                        if($count && $count < count($cart) - 1)
-                            $doc->appendChild($doc->createElement("hr"));
-
-                        $count++;
                     }
                     echo $doc->saveHTML();
                 ?>
-
-                <!--<button class="formBtn" type="button"><a href="#">Remove</a></button>-->
+                <div class="formCenter">
+                    <button class="formBtn"><a href="?cartAction=Clear">Clear</a></button>
+                    <button class="formBtn"><a href="?cartAction=Checkout">Checkout</a></button>
+                </div>
 
             </section>
 

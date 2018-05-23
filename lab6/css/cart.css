@@ -2,14 +2,17 @@
     TODO: Clean CSS format, all files
 */
 
+h2 {
+    text-align:center;
+}
+
 h4 {
     margin:5px 0;
 }
 
 .cartLine {
     text-align:center;
-    height:162px;
-    margin:5px 0;
+    margin:10px 0;
 }
 
 .cartLine p {
@@ -36,9 +39,4 @@ h4 {
 
 .cartLine img {
     width:120px;
-}
-
-.formBtn {
-    display:block;
-    margin:2px 0;
 }
