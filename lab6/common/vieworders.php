@@ -17,9 +17,16 @@
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
         
             <section id="content">
+                <div class="formCenter">
+                    <a href="/lab6/admin/index.php">Go back</a>
+                    <hr>
+                </div>
+
                 <?php
                     if($userInfo['admin_id']) $orders = getOrders();
                     else $orders = getOrders($user);
+
+                    if(!$orders) echo "No orders to display";
 
                     $doc = new DOMDocument();
                     foreach($orders as $order) {

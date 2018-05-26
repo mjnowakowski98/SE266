@@ -34,9 +34,10 @@
                         $update = true;
                         break;
                     case 'Update':
-                        var_dump(updateCategory($catId, $catName));
+                        updateCategory($catId, $catName);
                         break;
                     case 'Delete':
+                        deleteCategory($catId);
                         break;
                     default:
                         break;
@@ -44,14 +45,23 @@
             ?>
         
             <section id="content">
-                <h3><?php
-                    if(!$update) echo 'Create New Category';
-                    else echo "Update Category with id: $catId";
-                ?></h3>
+                <div class="formCenter">
+                    <a href="/lab6/admin/index.php">Go back</a>
+                    <hr>
+                </div>
+
+                <h3>
+                    <?php
+                        if(!$update) echo 'Create New Category';
+                        else echo "Update Category with id: $catId";
+                    ?>
+                </h3>
                 <form action="#" method="GET">
                     <input type="hidden" name="catId" value="<?php echo $catId; ?>">
                     <label>Name: <input type="text" name="catName" required></label>
-                    <input type="submit" name="catAction" value="Update">
+                    <input type="submit" name="catAction" value="<?php
+                        if($update) echo "Update"; else echo "Add";
+                    ?>">
                     <?php
                         if($update) {
                             $doc = new DOMDocument();

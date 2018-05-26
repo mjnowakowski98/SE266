@@ -3,10 +3,8 @@
 /*
 TODO:
     Clean CSS/Page Formatting
-    Add admin update products --
     Add product search (Cust/admin)
     Add product sort (Cust/admin)
-    Implement admin delete category
     Add some more categories/products
     Remove notice on file upload*
     Add total price to cart

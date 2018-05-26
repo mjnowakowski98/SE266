@@ -21,9 +21,6 @@
 
             <?php
                 $productId = $_REQUEST['productId'] ?? NULL;
-                $product = getProductInfo($productId);
-                $image = $product['image'];
-                if(!$image) $image = "default.png";
 
                 $prodAction = $_POST['prodAction'] ?? NULL;
                 switch($prodAction) {
@@ -32,11 +29,10 @@
                         $newPrice = $_POST['price'] ?? NULL;
                         //$newDesc = $_POST['description'];
                         $newCatId = $_POST['catId'] ?? NULL;
-                        $newImage = $newImage = $_POST['prevImage'];
+                        $newImage = $_POST['prevImage'];
 
                         $imageFile = $_FILES['image'] ?? NULL;
-                        var_dump($imageFile);
-                        if($imageFile) {
+                        if($imageFile['size']) {
                             $errors = array();
                             $fileName = $imageFile['name'];
                             $fileSize = $imageFile['size'];
@@ -62,12 +58,30 @@
                         updateProductInfo($productId, $newName, $newPrice, $newImage, $newCatId);
                         break;
 
+                    case 'Delete':
+                        deleteProduct($productId);
+                        break;
+
                     default:
                         break;
                 }
             ?>
         
             <section id="content">
+                <a href="/lab6/admin/products.php">Go back</a>
+                <hr>
+                
+                <?php
+                    $product = getProductInfo($productId);
+                    if(!$product) {
+                        echo "This product does not exist or has been deleted";
+                        exit;
+                    }
+
+                    $image = $product['image'];
+                    if(!$image) $image = "default.png";
+                ?>
+
                 <!-- Method is post to handle image upload -->
                 <form action="#" method="POST" enctype="multipart/form-data">
                     <div id="left">

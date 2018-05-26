@@ -143,8 +143,8 @@
         try {
             global $db;
 
-            $sql  = "INSERT INTO `orders` (user_id) ";
-            $sql .= "VALUES(:userId);";
+            $sql  = "INSERT INTO `orders` (user_id, date_created) ";
+            $sql .= "VALUES(:userId, NOW());";
 
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':userId', $userId);
@@ -162,6 +162,8 @@
                 $stmt->bindParam(':productId', $line['productId']);
                 $stmt->bindParam(':qty', $line['qty']);
                 $stmt->execute();
+
+                $stmt->debugDumpParams();
 
                 if(!$stmt->rowCount()) echo "Warning: failed to add item";
             }
@@ -312,6 +314,22 @@
         } catch(PDOException $e) { die("Failed to update category"); }
     }
 
+    function deleteCategory($catId) {
+        try {
+            global $db;
+
+            $sql  = "DELETE FROM `categories` ";
+            $sql .= "WHERE category_id = :catId";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':catId', $catId);
+            $stmt->execute();
+
+            return $stmt->rowCount();
+
+        } catch(PDOException $e) { die("Failed to delete category"); }
+    }
+
     function addProduct($prodName, $price, $image, $categoryId) {
         try {
             global $db;
@@ -326,10 +344,25 @@
             $stmt->bindParam(':categoryId', $categoryId);
             $stmt->execute();
 
-            $stmt->debugDumpParams();
+            return $stmt->rowCount();
+
+        } catch(PDOException $e) { die("Failed to add product"); }
+    }
+
+    function deleteProduct($prodId) {
+        try {
+            global $db;
+
+            $sql  = "DELETE FROM `products` ";
+            $sql .= "WHERE product_id = :prodId";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':prodId', $prodId);
+            $stmt->execute();
 
             return $stmt->rowCount();
-        } catch(PDOException $e) { die("Failed to add product"); }
+
+        } catch(PDOException $e) { die("Failed to delete product"); }
     }
 
     function updateProductInfo($productId, $name, $price, $image, $catId) {
@@ -342,7 +375,7 @@
 
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':prodName', $name);
-            $stmt->bindParam(':price', $price, PDO::PARAM_FLOAT);
+            $stmt->bindParam(':price', $price);
             $stmt->bindParam(':image', $image);
             $stmt->bindParam(':catId', $catId);
             $stmt->bindParam(':prodId', $productId);
@@ -350,6 +383,6 @@
 
             return $stmt->rowCount();
 
-        } catch(PDOException $e) { die(); }
+        } catch(PDOException $e) { die("Failed to update product"); }
     }
 ?>

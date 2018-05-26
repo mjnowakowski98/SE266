@@ -28,7 +28,7 @@
                 $catId = $_POST['catId'] ?? NULL;
 
                 $imageFile = $_FILES['image'] ?? NULL;
-                if($imageFile) {
+                if($imageFile['size']) {
                     $errors = array();
                     $fileName = $imageFile['name'];
                     $fileSize = $imageFile['size'];
@@ -64,6 +64,11 @@
             ?>
         
             <section id="content">
+                <div class="formCenter">
+                    <a href="/lab6/admin/index.php">Go back</a>
+                    <hr>
+                </div>
+
                 <section id="addProduct">
                     <!-- method is post for image uploading, would be get otherwise -->
                     <form action="#" method="POST" enctype="multipart/form-data">
@@ -73,7 +78,6 @@
                         <label>Price: <input class="txtBox" type="text" name="price"></label>
                         <label>Category:
                             <select name="catId">
-                                <option value="All">All</option>
                                 <?php
                                     $categories = getCategories();
 
