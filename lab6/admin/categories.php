@@ -3,8 +3,6 @@
     include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/phphead.php");
 ?>
 
-<!-- TODO: Make this look fancy -->
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -32,10 +30,10 @@
                     case 'Add':
                         addCategory($catName);
                         break;
-                    case 'Update':
+                    case 'startUpdate':
                         $update = true;
                         break;
-                    case 'sendUpdate':
+                    case 'Update':
                         var_dump(updateCategory($catId, $catName));
                         break;
                     case 'Delete':
@@ -52,10 +50,18 @@
                 ?></h3>
                 <form action="#" method="GET">
                     <input type="hidden" name="catId" value="<?php echo $catId; ?>">
-                    <input type="hidden" name="catAction" value="<?php
-                    if($update) echo 'sendUpdate'; else echo 'Add'?>">
                     <label>Name: <input type="text" name="catName" required></label>
-                    <input type="submit">
+                    <input type="submit" name="catAction" value="Update">
+                    <?php
+                        if($update) {
+                            $doc = new DOMDocument();
+                            $cancelLink = $doc->createElement("a");
+                            $cancelLink->setAttribute("href", "/lab6/admin/categories.php");
+                            $cancelLink->appendChild($doc->createTextNode("Cancel"));
+                            $doc->appendChild($cancelLink);
+                            echo $doc->saveHTML();
+                        }
+                    ?>
                 </form>
 
                 <h3>Existing Categories:</h3>
@@ -75,7 +81,7 @@
                         $div->appendChild($doc->createTextNode(' | '));
 
                         $updateLink = $doc->createElement("a");
-                        $updateLink->setAttribute("href", "?catAction=Update&catId=" . $cat['category_id']);
+                        $updateLink->setAttribute("href", "?catAction=startUpdate&catId=" . $cat['category_id']);
                         $updateLink->appendChild($doc->createTextNode("Update"));
                         $div->appendChild($updateLink);
 

@@ -18,14 +18,14 @@
     color:black;
 
     width:304px;
-    height:278px;
+    height:282px;
     position:fixed;
 
     top:50%;
     left:50%;
 
     margin-left:-159px;;
-    margin-top:-139px;
+    margin-top:-141px;
 
     padding:5px;
 
@@ -36,14 +36,14 @@
     color:black;
 
     width:304px;
-    height:317px;
+    height:321px;
     position:absolute;
 
     top:50%;
     left:50%;
 
     margin-left:-159px;;
-    margin-top:-158.5px;
+    margin-top:-160.5px;
 
     padding:5px;
 
@@ -54,14 +54,14 @@
     color:black;
 
     width:304px;
-    height:161px;
+    height:165px;
     position:fixed;
 
     top:50%;
     left:50%;
 
     margin-left:-152px;
-    margin-top:-80.5px;
+    margin-top:-82.5px;
 
     padding:5px;
 
@@ -88,6 +88,7 @@
 
 .txtBox {
     width:300px;
+    margin:2px 0;
 }
 
 button a {
@@ -123,3 +124,7 @@ button a:visited {
 input:invalid {
     border:2px solid red;
 }
+
+select { margin:2px 0; }
+
+.inFile {margin:2px 0;}

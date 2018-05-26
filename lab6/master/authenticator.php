@@ -2,6 +2,7 @@
     // Some debug functions
     $stopExec = $_GET['debug'] ?? false;
 
+    session_start();
     include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/dbfunctions.php");
 
     // Get sending page info
@@ -90,7 +91,7 @@
         $userInfo = getUserinfo($user);
 
         if($userInfo['admin_id']) {
-            header("Location: /lab6/admin/index.php");
+            header("Location: /lab6/admin/index.php?");
             exit;
         }
     }

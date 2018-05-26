@@ -18,11 +18,12 @@
 
             <section id="content">
                 <?php
-                    $product = getProductInfo($_GET['productId']);
+                    $productId = $_GET['productId'] ?? NULL;
+                    $product = getProductInfo($productId);
                     $product['description'] = NULL;
 
                     if(!$product['image']) $product['image'] = "default.png";
-                    if(!$product['description']) $product['description'] = "This product has no description";
+                    if(!$product['description']) $product['description'] = "(Not implemented) This product has no description";
                 ?>
 
                 <div id="left">

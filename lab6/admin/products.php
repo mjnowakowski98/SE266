@@ -23,7 +23,6 @@
 
             <?php
                 $prodAction = $_POST['prodAction'] ?? NULL;
-                $lastImage = $_POST['lastImage'] ?? NULL;
                 $prodName = $_POST['prodName'] ?? NULL;
                 $price = $_POST['price'] ?? NULL;
                 $catId = $_POST['catId'] ?? NULL;
@@ -65,34 +64,45 @@
             ?>
         
             <section id="content">
-                <!-- method is post for image uploading, would be get otherwise -->
-                <form action="#" method="POST" enctype="multipart/form-data">
-                    <h3>Add New Product</h3>
-                    <input type="hidden" name="prodAction" value="Add">
-                    <input type="hidden" name="lastImage" value="">
-                    <label>Name: <input type="text" name="prodName"></label>
-                    <label>Price: <input type="text" name="price"></label>
-                    <label>Category:
-                        <select name="catId">
-                            <option value="All">All</option>
-                            <?php
-                                $categories = getCategories();
+                <section id="addProduct">
+                    <!-- method is post for image uploading, would be get otherwise -->
+                    <form action="#" method="POST" enctype="multipart/form-data">
+                        <h3>Add New Product</h3>
+                        <input type="hidden" name="prodAction" value="Add">
+                        <label>Name: <input class="txtBox" type="text" name="prodName"></label>
+                        <label>Price: <input class="txtBox" type="text" name="price"></label>
+                        <label>Category:
+                            <select name="catId">
+                                <option value="All">All</option>
+                                <?php
+                                    $categories = getCategories();
 
-                                $doc = new DOMDocument();
-                                foreach($categories as $cat) {
-                                    $option = $doc->createElement("option");
-                                    $option->setAttribute("value", $cat['category_id']);
-                                    $option->appendChild($doc->createTextNode($cat['category']));
-                                    $doc->appendChild($option);
-                                }
-                                echo $doc->saveHTML();
-                            ?>
-                        </select>
-                    </label>
-                    <p>Choose an Image:</p>
-                    <input type="file" name="image">
-                    <input type="submit">
-                </form>
+                                    $doc = new DOMDocument();
+                                    foreach($categories as $cat) {
+                                        $option = $doc->createElement("option");
+                                        $option->setAttribute("value", $cat['category_id']);
+                                        $option->appendChild($doc->createTextNode($cat['category']));
+                                        $doc->appendChild($option);
+                                    }
+                                    echo $doc->saveHTML();
+                                ?>
+                            </select>
+                        </label>
+
+                        <p>Choose an Image:</p>
+                        <input type="file" name="image">
+                        <input type="submit">
+                    </form>
+                </section>
+                
+                <hr>
+                <section id="updateProduct">
+                    <h3>Update products</h3>
+                    <?php
+                        $adminSender = true;
+                        include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/products.php");
+                    ?>           
+                </section>
             </section>
 
         <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/footer.php"); ?>

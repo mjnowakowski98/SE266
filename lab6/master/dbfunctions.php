@@ -331,4 +331,25 @@
             return $stmt->rowCount();
         } catch(PDOException $e) { die("Failed to add product"); }
     }
+
+    function updateProductInfo($productId, $name, $price, $image, $catId) {
+        try {
+            global $db;
+
+            $sql  = "UPDATE `products` ";
+            $sql .= "SET product = :prodName, price = :price, image = :image, category_id = :catId ";
+            $sql .= "WHERE product_id = :prodId;";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':prodName', $name);
+            $stmt->bindParam(':price', $price, PDO::PARAM_FLOAT);
+            $stmt->bindParam(':image', $image);
+            $stmt->bindParam(':catId', $catId);
+            $stmt->bindParam(':prodId', $productId);
+            $stmt->execute();
+
+            return $stmt->rowCount();
+
+        } catch(PDOException $e) { die(); }
+    }
 ?>

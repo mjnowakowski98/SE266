@@ -22,8 +22,10 @@
 
         default:
             // If no user logged in, no valid action and page is admin only...
-            if(!$user && $isAdminPage) // ... Show sign in
+            if(!$user && $isAdminPage)  { // ... Show sign in
                 include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/auth.php");
+                exit; // Make the rest of the page useless, otherwise one could pickup sign-in-be-gone from inspect element
+            }
             break;
     }
 ?>
