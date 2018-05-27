@@ -13,6 +13,7 @@
         
         <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/mastercsslinks.php"); ?>
         <link href="/lab6/css/displays.css" type="text/css" rel="stylesheet">
+        <link href="/lab6/css/addproduct.css" type="text/css" rel="stylesheet">
     </head>
     
     <body>
@@ -96,7 +97,6 @@
                     </form>
                 </section>
                 
-                <hr>
                 <section id="updateProduct">
                     <h3>Update products</h3>
                     <?php

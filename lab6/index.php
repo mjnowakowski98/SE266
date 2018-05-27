@@ -1,25 +1,4 @@
-<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/phphead.php");
-
-/*
-TODO:
-    // UI
-    ??Add product search (Cust/admin)
-    ??Add product sort (Cust/admin)
-    Move total/tax to checkout case (cart)
-    Use customer address to determine if taxable
-
-    // Code
-    Comment the everything
-    Move file upload handling to master/utils
-
-    // Tables
-    Add user address to userinfo
-
-    // Misc
-    Add some more categories/products
-    ??Remove notice on file upload *may be gone already
-*/
-?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/phphead.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">

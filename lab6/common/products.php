@@ -3,14 +3,15 @@
         <select name="catId">
             <option selected>All</option>>
             <?php
-                $catId = filter_input(INPUT_GET, 'catId', FILTER_VALIDATE_INT) ?? 'All';
-                
+                $catId = filter_input(INPUT_GET, 'catId', FILTER_SANITIZE_STRING) ?? 'All';
+                if($catId !== 'All') $catId = intval($catId);
+
                 $categories = getCategories();
                 $doc = new DOMDocument();
                 foreach($categories as $cat) {
                     $option = $doc->createElement("option");
                     $option->setAttribute("value", $cat['category_id']);
-                    if($catId === $cat['category_id']) $option->setAttribute("selected", "true");
+                    if($catId == $cat['category_id']) $option->setAttribute("selected", "true");
                     $option->appendChild($doc->createTextNode($cat['category']));
                     $doc->appendChild($option);
                 }
