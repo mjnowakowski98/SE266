@@ -244,6 +244,7 @@
 
     // Product functions (consider moving to seperate file)
 
+    // Get list of product categories
     function getCategories() {
         try {
             global $db;
@@ -261,6 +262,7 @@
         } catch(PDOException $e) { die("Failed to get category list"); }
     }
 
+    // Get products in a specific category only
     function getProductsByCategory($catId) {
         try {
             global $db;
@@ -279,7 +281,7 @@
         } catch(PDOException $e) { die("Failed to get category products"); }
     }
 
-
+    // Get list of all da products
     function getProductList() {
         try {
             global $db;
@@ -296,6 +298,7 @@
         } catch (PDOException $e) { die("Failed to get product listings"); };
     }
 
+    // Get extended product information
     function getProductInfo($productId) {
         try {
             global $db;
@@ -313,6 +316,7 @@
         } catch(PDOException $e) { die("Failed to get product information"); }
     }
 
+    // Create a new product category
     function addCategory($catName) {
         try {
             global $db;
@@ -329,6 +333,7 @@
         } catch(PDOException $e) { die("Failed to add category"); }
     }
 
+    // Update existing product category
     function updateCategory($catId, $catName) {
         try {
             global $db;
@@ -347,6 +352,7 @@
         } catch(PDOException $e) { die("Failed to update category"); }
     }
 
+    // Delete a category if empty, otherwise return an error
     function deleteCategory($catId) {
         try {
             global $db;
@@ -373,6 +379,7 @@
         } catch(PDOException $e) { die("Failed to delete category"); }
     }
 
+    // Add a new product
     function addProduct($prodName, $price, $image, $categoryId) {
         try {
             global $db;
@@ -392,6 +399,7 @@
         } catch(PDOException $e) { die("Failed to add product"); }
     }
 
+    // Delete a product
     function deleteProduct($prodId) {
         try {
             global $db;
@@ -408,6 +416,7 @@
         } catch(PDOException $e) { die("Failed to delete product"); }
     }
 
+    // Update a product
     function updateProductInfo($productId, $name, $price, $image, $catId) {
         try {
             global $db;

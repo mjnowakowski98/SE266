@@ -1,4 +1,7 @@
 <?php
+    // To access admin signup-> go to any restricted page while logged out (docroot - /lab6/admin/index.php) -> page will show auth prompt, click sign up
+
+    // Output errors
     $msg = array();
 
     $err = filter_input(INPUT_GET, 'err', FILTER_SANITIZE_STRING) ?? NULL;

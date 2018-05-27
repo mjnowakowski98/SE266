@@ -1,4 +1,4 @@
-<?php
+<?php // Output messages to user from authenticator if any
     $msg = array();
 
     $err = filter_input(INPUT_GET, 'err', FILTER_SANITIZE_STRING) ?? NULL;

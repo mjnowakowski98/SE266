@@ -1,6 +1,6 @@
 <section class="msgBox dimmerOverlay">
     <?php
-        $returnQS = $returnQS ?? NULL;
+        $returnQS = $returnQS ?? NULL; // Used if querystring data needs to persist beyond reload
 
         $msg = $msg ?? NULL;
         if($msg) {
@@ -14,5 +14,5 @@
         }
     ?>
     <hr>
-    <a href="?<?php echo $returnQS; ?>">OK</a>
+    <a href="?<?php echo $returnQS; // Clear querystring if not set ?>">OK</a>
 </section>

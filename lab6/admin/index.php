@@ -1,5 +1,5 @@
 <?php
-    $isAdminPage = true;
+    $isAdminPage = true; // Specify that page is restricted, phphead/header will handle lockout
     include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/phphead.php");
 ?>
 
@@ -18,6 +18,7 @@
         <div id="wrapper">
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
         
+            <!-- basic links to admin pages -->
             <section id="content" class="formCenter">
                 <a href="/lab6/admin/categories.php">Category Management</a> |
                 <a href="/lab6/admin/products.php">Product Management</a> |

@@ -2,7 +2,7 @@
     <label>Category: 
         <select name="catId">
             <option selected>All</option>>
-            <?php
+            <?php // Category filter select
                 $catId = filter_input(INPUT_GET, 'catId', FILTER_SANITIZE_STRING) ?? 'All';
                 if($catId !== 'All') $catId = intval($catId);
 
@@ -23,7 +23,7 @@
 </form>
 
 <section class="displayRow">
-    <?php
+    <?php // Output list of products
         if($catId === 'All') $productList = getProductList();
         else $productList = getProductsByCategory($catId);
         $doc = new DOMDocument();

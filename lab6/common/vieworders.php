@@ -24,7 +24,7 @@
                     <hr>
                 </div>
 
-                <?php
+                <?php // Ouput list of orders available to the user
                     if($userInfo['admin_id']) $orders = getOrders();
                     else $orders = getOrders($user);
 

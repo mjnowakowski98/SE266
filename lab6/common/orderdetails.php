@@ -26,7 +26,7 @@
                     $orderInfo = getOrderLines($orderId);
 
                     $doc = new DOMDocument();
-                    foreach($orderInfo as $line) {
+                    foreach($orderInfo as $line) { // Output list of products in order
                         $productInfo = getProductInfo($line['product_id']);
                         $productName = $doc->createElement('a');
                         $productName->setAttribute("href", "/lab6/productdetails.php?productId=" . $line['product_id']);
