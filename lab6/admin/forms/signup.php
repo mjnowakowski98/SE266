@@ -1,5 +1,7 @@
 <?php
     // To access admin signup-> go to any restricted page while logged out (docroot - /lab6/admin/index.php) -> page will show auth prompt, click sign up
+    // Already created admin accout -> email: admin@traderdans.net pass: Qwaszx4321
+    // Admin table entry must be inserted to db manually, where admin_id is a 128 uuid expressed in base 16 (32 chars - 1 nibble/char)
 
     // Output errors
     $msg = array();

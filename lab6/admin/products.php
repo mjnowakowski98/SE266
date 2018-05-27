@@ -34,7 +34,6 @@
                     $fileSize = $imageFile['size'];
                     $fileTmp = $imageFile['tmp_name'];
                     $fileType = $imageFile['type'];
-                    var_dump($fileName);
                     $fileExt = strtolower(end(explode('.',$_FILES['image']['name'])));
 
                     $extensions = array("jpeg", "jpg", "png");

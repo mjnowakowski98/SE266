@@ -2,10 +2,10 @@
 -- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 20, 2018 at 11:42 PM
--- Server version: 10.1.32-MariaDB
--- PHP Version: 7.2.5
+-- Host: localhost:3306
+-- Generation Time: May 27, 2018 at 06:30 PM
+-- Server version: 10.1.29-MariaDB-6
+-- PHP Version: 7.2.5-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `admins`;
 CREATE TABLE `admins` (
-  `admin_id` char(32) NOT NULL COMMENT 'Random UUID',
-  `email` varchar(150) NOT NULL,
+  `admin_id` varchar(32) NOT NULL,
+  `user_id` int(10) DEFAULT NULL,
   `can_register` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -39,8 +39,8 @@ CREATE TABLE `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`admin_id`, `email`, `can_register`) VALUES
-('396f88d9c8a44c39b576e218b800c523', 'admin@traderdan.net', 0);
+INSERT INTO `admins` (`admin_id`, `user_id`, `can_register`) VALUES
+('777d9aca5af64ecb8b3ff0b47a80e2cb', 9, 0);
 
 -- --------------------------------------------------------
 
@@ -59,8 +59,50 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`category_id`, `category`) VALUES
+(4, 'TestAdd2'),
 (1, 'TestCat1'),
 (2, 'TestCat2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orderitems`
+--
+
+DROP TABLE IF EXISTS `orderitems`;
+CREATE TABLE `orderitems` (
+  `order_id` int(10) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `price_paid` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orderitems`
+--
+
+INSERT INTO `orderitems` (`order_id`, `product_id`, `qty`, `price_paid`) VALUES
+(2, 2, 1, 6.66);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders` (
+  `order_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `shipping_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `user_id`, `shipping_date`) VALUES
+(2, 9, '2018-05-27');
 
 -- --------------------------------------------------------
 
@@ -82,8 +124,18 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `category_id`, `product`, `price`, `image`) VALUES
-(1, 1, 'TEST PRODUCT 1', 4.20, NULL),
-(2, 1, 'TEST PRODUCT 2', 6.66, NULL);
+(1, 4, 'TEST PRODUCT 1', 500.00, 'uploadtest2.png'),
+(2, 1, 'TEST PRODUCT 2', 6.66, NULL),
+(3, 2, 'TEST PRODUCT 3', 0.99, 'uploadtest3.png'),
+(4, 2, 'TEST PRODUCT 4', 999.99, ''),
+(14, 4, 'TestImage1', 12.34, 'uploadtest.png'),
+(17, 2, 'TestImage 2', 43.21, 'uploadtest3.png'),
+(18, 1, 'TestCat1 Product2', 11.11, NULL),
+(19, 1, 'Send Help', 43.19, 'uploadtest2.png'),
+(20, 1, 'El Producto', 22.44, NULL),
+(21, 2, 'I am not very creative', 7456.32, NULL),
+(22, 4, 'Some penguin', 9.99, '220px-Tux.png'),
+(23, 4, 'StdMcDefault', 49.98, NULL);
 
 -- --------------------------------------------------------
 
@@ -94,19 +146,19 @@ INSERT INTO `products` (`product_id`, `category_id`, `product`, `price`, `image`
 DROP TABLE IF EXISTS `userinfo`;
 CREATE TABLE `userinfo` (
   `user_id` int(10) NOT NULL,
-  `first_name` varchar(20) DEFAULT NULL,
-  `last_name` varchar(20) DEFAULT NULL,
-  `is_admin` tinyint(1) NOT NULL DEFAULT '0'
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `admin_id` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `userinfo`
 --
 
-INSERT INTO `userinfo` (`user_id`, `first_name`, `last_name`, `is_admin`) VALUES
-(1, 'Perfectly', 'Generic', 0),
-(4, 'Dan', 'McTraderGuy', 1),
-(5, 'John', 'Smith', 0);
+INSERT INTO `userinfo` (`user_id`, `first_name`, `last_name`, `admin_id`) VALUES
+(7, 'q', 'q', NULL),
+(9, 'Dan', 'McTraderGuy', '777d9aca5af64ecb8b3ff0b47a80e2cb'),
+(10, 'Generic', 'User', NULL);
 
 -- --------------------------------------------------------
 
@@ -127,19 +179,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `email`, `password`, `created`) VALUES
-(1, 'ge@neric.user', '$2y$10$Dgx52DOyR.pbGL9I74of9.oB/c/I/lmRwNNMJAQPc2l4jsJs50ySy', '2018-05-18 13:49:04'),
-(4, 'admin@traderdan.net', '$2y$10$zhIYmFx2lOURuV3wgBz6huBOXtEkuJRHiLkxe653b037XrEOzl96S', '2018-05-18 16:26:12'),
-(5, 'johnsmith@gmail.com', '$2y$10$ufSwu1lOVrn8ndWQQbz/p.gTvGPVB76ICYRoPEX/akNT3c4gMVvkW', '2018-05-20 14:51:48');
+(9, 'admin@traderdans.net', '$2y$10$K7Owy.TWG6L4XpAC0hm5eevTKD/GIgs7mFa4WRsyt04y57weWH4l2', '2018-05-22 10:06:17'),
+(10, 'generic@user.com', '$2y$10$gfYiX7wGtWPiOEBlYOeW/u9ISIMoYI4bBwrRTL3PIuB4nVrPdeRA6', '2018-05-22 10:09:47');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `admins`
---
-ALTER TABLE `admins`
-  ADD PRIMARY KEY (`admin_id`);
 
 --
 -- Indexes for table `categories`
@@ -147,6 +192,12 @@ ALTER TABLE `admins`
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`),
   ADD UNIQUE KEY `category` (`category`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`order_id`);
 
 --
 -- Indexes for table `products`
@@ -159,7 +210,8 @@ ALTER TABLE `products`
 -- Indexes for table `userinfo`
 --
 ALTER TABLE `userinfo`
-  ADD UNIQUE KEY `user_id` (`user_id`);
+  ADD UNIQUE KEY `ndx_userinfo_userid` (`user_id`),
+  ADD UNIQUE KEY `ndx_userinfo_adminid` (`admin_id`);
 
 --
 -- Indexes for table `users`
@@ -176,19 +228,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `category_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `product_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
