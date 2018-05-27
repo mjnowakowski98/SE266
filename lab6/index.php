@@ -2,20 +2,37 @@
 
 /*
 TODO:
-    Clean CSS/Page Formatting
+    // Admin Pages
+    Restrict admins from buying items
+    
+    // User management
+    err: email already taken
+    check password is not empty (serverside, signup)
+        err: cannot be blank
+
+    // UI
+    ?? Display lowest catId first (remove all)
+    Display err messages from auth head
     Add product search (Cust/admin)
     Add product sort (Cust/admin)
-    Add some more categories/products
-    Remove notice on file upload*
     Add total price to cart
     Restrict order detail view to admin/current user
-    Restrict admins from buying items
-    Change get/post vars to filter input
     Support descriptions
-    Display err messages from header
-    Implement err messages where applicible
+    Add return to shopping link from cart
 
-    // For the love of Satan, do not open this in Firefox or IE
+    // Code
+    Clean CSS/Page Formatting
+    Change get/post vars to filter input
+    Comment the everything
+
+    // Tables
+    Add user address to userinfo
+    Add price paid to orderitems
+
+    // Misc
+    Add some more categories/products
+    Remove notice on file upload*
+    Fix css on other engines
 */
 ?>
 

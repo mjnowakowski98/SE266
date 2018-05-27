@@ -29,5 +29,6 @@
 
 .dimmerOverlay {
     background-color:white;
+    color:black;
     z-index:3;
 }

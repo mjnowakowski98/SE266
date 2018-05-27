@@ -12,6 +12,7 @@
         <link href="/lab6/css/formparts.css" type="text/css" rel="stylesheet">
         <link href="/lab6/css/effects.css" type="text/css" rel="stylesheet">
         <link href="/lab6/css/displays.css" type="text/css" rel="stylesheet">
+        <link href="/lab6/css/msgbox.css" type="text/css" rel="stylesheet">
     </head>
     
     <body>
@@ -20,9 +21,11 @@
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
 
             <?php
-                $catAction = $_GET['catAction'] ?? NULL;
-                $catId = $_GET['catId'] ?? NULL;
-                $catName = $_GET['catName'] ?? NULL;
+                $msg = array();
+
+                $catAction = filter_input(INPUT_GET, 'catAction', FILTER_SANTIZE_STRING) ?? NULL;
+                $catId = filter_input(INPUT_GET, 'catId', FILTER_VALIDATE_INT) ?? NULL;
+                $catName = filter_input(INPUT_GET, 'catName', FILTER_SANITIZE_STRING) ?? NULL;
 
                 $update = false;
 
@@ -37,11 +40,15 @@
                         updateCategory($catId, $catName);
                         break;
                     case 'Delete':
-                        deleteCategory($catId);
+                        $count = deleteCategory($catId);
+                        if($count === 'err_cat_not_empty')
+                            $msg[] = 'Category must be empty to delete';
                         break;
                     default:
                         break;
                 }
+
+                if($msg) include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/msgbox.php");
             ?>
         
             <section id="content">

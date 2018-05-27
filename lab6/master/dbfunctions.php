@@ -217,7 +217,8 @@
             global $db;
 
             $sql  = "SELECT category_id, category ";
-            $sql .= "FROM `categories`;";
+            $sql .= "FROM `categories` ";
+            $sql .= "ORDER BY category_id ASC;";
 
             $stmt = $db->prepare($sql);
             $stmt->execute();
@@ -318,6 +319,21 @@
         try {
             global $db;
 
+            $sql  = "SELECT category_id ";
+            $sql .= "FROM `products` ";
+            $sql .= "WHERE category_id = :catId;";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':catId', $catId);
+            $stmt->execute();
+
+            if($stmt->rowCount()) return 'err_cat_not_empty';
+
+            var_dump($stmt->rowCount());
+
+
+            exit;
+            
             $sql  = "DELETE FROM `categories` ";
             $sql .= "WHERE category_id = :catId";
 
