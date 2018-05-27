@@ -12,6 +12,7 @@
         <link href="/lab6/css/formparts.css" type="text/css" rel="stylesheet">
         <link href="/lab6/css/effects.css" type="text/css" rel="stylesheet">
         <link href="/lab6/css/productdetails.css" type="text/css" rel="stylesheet">
+        <link href="/lab6/css/msgbox.css" type="text/css" rel="stylesheet">
     </head>
     
     <body>
@@ -20,6 +21,8 @@
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
 
             <?php
+                $msg = array();
+
                 $productId = filter_input(INPUT_GET, 'productId', FILTER_VALIDATE_INT) ??
                     filter_input(INPUT_POST, 'productId', FILTER_VALIDATE_INT) ?? NULL;
 
@@ -56,7 +59,12 @@
                             else var_dump($errors);
                         }
 
-                        updateProductInfo($productId, $newName, $newPrice, $newImage, $newCatId);
+                        $count = updateProductInfo($productId, $newName, $newPrice, $newImage, $newCatId);
+                        if($count) {
+                            $returnQS = $_SERVER['QUERY_STRING'];
+                            $msg[] = "Product updated successfully";
+                        }
+                        else $msg[] = "Failed to update product";
                         break;
 
                     case 'Delete':
@@ -66,6 +74,8 @@
                     default:
                         break;
                 }
+
+                if($msg) include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/msgbox.php");
             ?>
         
             <section id="content">

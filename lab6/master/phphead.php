@@ -6,9 +6,11 @@
 
     // Check if page is defined as admin only
     $isAdminPage = $isAdminPage ?? NULL;
+    $requireUser = $requireUser ?? NULL;
 
     // Get user if any
     $user = $_SESSION['userId'] ?? NULL;
+
     if($user) {
         $userInfo = getUserInfo($user); // If user exists get more info
 

@@ -4,15 +4,11 @@
 TODO:
     // Admin Pages
     Restrict admins from buying items
-    
-    // User management
-    err: email already taken
-    check password is not empty (serverside, signup)
-        err: cannot be blank
+    Allow select prev upload from images
 
     // UI
     ?? Display lowest catId first (remove all)
-    Display err messages from auth head
+    --Display err messages from auth head--
     Add product search (Cust/admin)
     Add product sort (Cust/admin)
     Add total price to cart
@@ -22,8 +18,8 @@ TODO:
 
     // Code
     Clean CSS/Page Formatting
-    Change get/post vars to filter input
     Comment the everything
+    Set file upload name conventions
     Move file upload handling to master/utils
 
     // Tables

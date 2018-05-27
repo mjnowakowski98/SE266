@@ -1,7 +1,7 @@
 <?php
     // Setup page behavior
     $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING) ?? NULL;
-    if(!$isAdminPage) $prevPage = $_SERVER['PHP_SELF'];
+    if(!$isAdminPage && !$requireUser) $prevPage = $_SERVER['PHP_SELF'];
     else $prevPage = "/lab6/index.php";
 
     switch($action) {
@@ -14,15 +14,18 @@
                 include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/forms/signup.php");
             else
                 include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/admin/forms/signup.php");
+
+            if($isAdminPage || $requireUser) exit;
             break;
 
         case 'signIn':
             include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/auth.php");
+            if($isAdminPage || $requireUser) exit;
             break;
 
         default:
-            // If no user logged in, no valid action and page is admin only...
-            if(!$user && $isAdminPage)  { // ... Show sign in
+            // If no user logged in, no valid action and bad login...
+            if(!$user && ($isAdminPage || $requireUser))  { // ... Show sign in
                 include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/auth.php");
                 exit; // Make the rest of the page useless, otherwise one could pickup sign-in-be-gone from inspect element
             }

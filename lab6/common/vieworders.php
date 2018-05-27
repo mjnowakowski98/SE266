@@ -1,4 +1,7 @@
-<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/phphead.php"); ?>
+<?php
+    $requireUser = true;
+    include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/phphead.php");
+?>
 
 <!DOCTYPE html>
 <html lang="en">

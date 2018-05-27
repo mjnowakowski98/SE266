@@ -9,8 +9,10 @@
     $prevPage = filter_input(INPUT_POST, 'prevPage', FILTER_SANITIZE_STRING) ?? NULL;
     $sender = filter_input(INPUT_POST, 'sender', FILTER_SANITIZE_STRING) ?? NULL; // Name of form that sent request
 
-    // User info                        // Used by
+    // User info                                                                  // Used by
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING) ?? NULL;   // signIn, signUp
+    if(checkEmail($email)) header("Location: $prevPage?action=signUp&err=email_already_registered");
+
     $pass1 = filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_STRING) ?? NULL;    // signIn, signUp
     $pass2 = filter_input(INPUT_POST, 'pass2', FILTER_SANITIZE_STRING) ?? NULL;   // signUp
 

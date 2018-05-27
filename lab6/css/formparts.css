@@ -36,14 +36,14 @@
     color:black;
 
     width:304px;
-    height:321px;
-    position:absolute;
+    height:325px;
+    position:fixed;
 
     top:50%;
     left:50%;
 
     margin-left:-159px;;
-    margin-top:-160.5px;
+    margin-top:-162.5px;
 
     padding:5px;
 

@@ -23,7 +23,7 @@
             <?php
                 $msg = array();
 
-                $catAction = filter_input(INPUT_GET, 'catAction', FILTER_SANTIZE_STRING) ?? NULL;
+                $catAction = filter_input(INPUT_GET, 'catAction', FILTER_SANITIZE_STRING) ?? NULL;
                 $catId = filter_input(INPUT_GET, 'catId', FILTER_VALIDATE_INT) ?? NULL;
                 $catName = filter_input(INPUT_GET, 'catName', FILTER_SANITIZE_STRING) ?? NULL;
 

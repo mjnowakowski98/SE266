@@ -2,6 +2,27 @@
     include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/dbcontroller.php");
 
     // User functions
+    function checkEmail($email) {
+        try {
+            $isTaken = false;
+
+            global $db;
+
+            $sql  = "SELECT email ";
+            $sql .= "FROM users ";
+            $sql .= "WHERE email = :email;";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+
+            if($stmt->rowCount()) $isTaken = true;
+
+            return $isTaken;
+
+        } catch(PDOException $e) { die("Failed to check for email"); }
+    }
+
     function validateUser($email, $guess) {
         global $db;
         try {
@@ -328,11 +349,6 @@
             $stmt->execute();
 
             if($stmt->rowCount()) return 'err_cat_not_empty';
-
-            var_dump($stmt->rowCount());
-
-
-            exit;
             
             $sql  = "DELETE FROM `categories` ";
             $sql .= "WHERE category_id = :catId";

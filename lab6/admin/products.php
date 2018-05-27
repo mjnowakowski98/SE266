@@ -24,7 +24,7 @@
             <?php
                 $prodAction = filter_input(INPUT_POST, 'prodAction', FILTER_SANITIZE_STRING) ?? NULL;
                 $prodName = filter_input(INPUT_POST, 'prodName', FILTER_SANITIZE_STRING) ?? NULL;
-                $price = filter_post(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT) ?? NULL;
+                $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT) ?? NULL;
                 $catId = filter_input(INPUT_POST, 'catId', FILTER_VALIDATE_INT) ?? NULL;
 
                 $imageFile = $_FILES['image'] ?? NULL;
@@ -54,8 +54,6 @@
                 switch($prodAction) {
                     case 'Add':
                         $count = addProduct($prodName, $price, $fileName, $catId);
-                        echo '<br>';
-                        var_dump($count);
                         break;
                     default:
                         break;
