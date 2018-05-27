@@ -7,18 +7,16 @@ TODO:
     Allow select prev upload from images
 
     // UI
-    ?? Display lowest catId first (remove all)
-    Add product search (Cust/admin)
-    Add product sort (Cust/admin)
+    ??Add product search (Cust/admin)
+    ??Add product sort (Cust/admin)
     Add adjust qty to cart
     Move total/tax to checkout case (cart)
-    Support descriptions
-    Add return to shopping link from cart
+    ??Support descriptions
 
     // Code
-    Clean CSS/Page Formatting
+    ??Clean CSS/Page Formatting
     Comment the everything
-    Set file upload name conventions
+    ??Set file upload name conventions
     Move file upload handling to master/utils
 
     // Tables
@@ -29,8 +27,8 @@ TODO:
 
     // Misc
     Add some more categories/products
-    Remove notice on file upload*
-    Fix css on other engines
+    ??Remove notice on file upload *may be gone already
+    ??Fix css on other engines (only really works on webkit rn)
 */
 ?>
 
