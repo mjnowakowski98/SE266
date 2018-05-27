@@ -8,11 +8,9 @@
     <head>
         <title>Trader Dan's Admin Panel</title>
         <meta charset="UTF-8">
-        <link href="/lab6/css/master.css" type="text/css" rel="stylesheet">
-        <link href="/lab6/css/formparts.css" type="text/css" rel="stylesheet">
-        <link href="/lab6/css/effects.css" type="text/css" rel="stylesheet">
+
+        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/mastercsslinks.php"); ?>
         <link href="/lab6/css/productdetails.css" type="text/css" rel="stylesheet">
-        <link href="/lab6/css/msgbox.css" type="text/css" rel="stylesheet">
     </head>
     
     <body>

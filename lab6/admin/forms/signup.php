@@ -1,4 +1,15 @@
 <?php
+    $msg = array();
+
+    $err = filter_input(INPUT_GET, 'err', FILTER_SANITIZE_STRING) ?? NULL;
+    if($err) {
+        $returnQS = 'action=signUp';
+        if($err === 'email_already_registered') $msg[] = "Email is already taken";
+        if($err === 'pwd_no_match') $msg[] = "Passwords do not match";
+
+        include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/msgbox.php");
+    }
+
     $email = $_SESSION['lastFormInfo']['email'] ?? NULL;
     $fName = $_SESSION['lastFormInfo']['fName'] ?? NULL;
     $lName = $_SESSION['lastFormInfo']['lName'] ?? NULL;
