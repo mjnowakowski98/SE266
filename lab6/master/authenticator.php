@@ -92,6 +92,7 @@
     if($user) {
         $userInfo = getUserinfo($user);
 
+        // Redirect admin user on sign in to admin index
         if($userInfo['admin_id']) {
             header("Location: /lab6/admin/index.php?");
             exit;

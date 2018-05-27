@@ -16,13 +16,14 @@
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
 
             <section id="content">
-                <?php
+                <?php // Getr product information
                     $productId = filter_input(INPUT_GET, 'productId', FILTER_VALIDATE_INT) ?? NULL;
                     $product = getProductInfo($productId);
-                    $product['description'] = NULL;
+                    $product['description'] = NULL; // Ran out of time to implement product descriptions, always uses default
 
+                    // Replace image/description with default if not specified
                     if(!$product['image']) $product['image'] = "default.png";
-                    if(!$product['description']) $product['description'] = "(Not implemented) This product has no description";
+                    if(!$product['description']) $product['description'] = "This product has no description";
                 ?>
 
                 <div id="left">

@@ -1,4 +1,4 @@
-<?php
+<?php // Get a PDOObject pointing to the database
     $dsn = "mysql:host=localhost;dbname=phpclassspring2018;";
     $userName="PHPClassSpring2018";
     $pWord="SE266";

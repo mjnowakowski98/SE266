@@ -2,6 +2,8 @@
     include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/dbcontroller.php");
 
     // User functions
+
+    // Check if email is already in use
     function checkEmail($email) {
         try {
             $isTaken = false;
@@ -23,6 +25,7 @@
         } catch(PDOException $e) { die("Failed to check for email"); }
     }
 
+    // Validate entered user credentials are correct
     function validateUser($email, $guess) {
         global $db;
         try {
@@ -46,6 +49,7 @@
         } catch(PDOException $e) { die("Failed to validate user info"); }
     }
 
+    // Get extended user information
     function getUserInfo($id) {
         global $db;
         try {
@@ -63,6 +67,7 @@
         } catch(PDOException $e) { die("Failed to retrieve user information"); }
     }
 
+    // Create a new user
     function addUser($email, $hash, $fName, $lName, $adminId) {
         global $db;
         try {
@@ -98,6 +103,8 @@
         } catch(PDOException $e) { die("Failed to create user"); }
     }
 
+    // Verify user is registering as a valid pending administrator
+    // Based on can_register and admin_id in table admins
     function verifyAdmin($adminId) {
         try {
 		    $allow = false;
@@ -120,6 +127,7 @@
         } catch(PDOException $e) { die("Failed to verify admin status"); }
     }
 
+    // Set if an admin can register their account
     function updateAdminStatus($adminId, $userId, $canRegister = false) {
         try {
             global $db;
@@ -138,6 +146,7 @@
         } catch(PDOException $e) { die("Failed setting admin status"); }
     }
 
+    // Remove user, not used
     function removeUserById($id) {
         global $db;
         try {
@@ -160,6 +169,7 @@
 
     // Order functions
 
+    // Cehckout user, add information to orders/orderitems
     function checkout($cart, $userId) {
         try {
             global $db;
@@ -193,6 +203,7 @@
         } catch(PDOException $e) { die("Failed to checkout, sorry 'bout that (not really)"); }
     }
 
+    // Get global list of orders, filter by user id if specified
     function getOrders($userId = NULL) {
         try {
             global $db;
@@ -212,6 +223,7 @@
         } catch(PDOException $e) {die("Failed to retrieve order list"); }
     }
 
+    // Get order information
     function getOrderLines($orderId) {
         try {
             global $db;
