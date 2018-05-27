@@ -17,10 +17,9 @@
 
             <?php
                 $cart = $_SESSION['cart'] ?? array();
-                $productId = filter_input(INPUT_GET, 'productId', FILTER_VAILDIATE_INT) ?? NULL;
-                $qty = filter_input(INPUT_GET, 'qty', FILTER_VAILDIATE_INT) ?? NULL;
-                $qty = intval($qty);
-                $cartAction = filter_input(INPUT_GET, 'cartAction', FILTER_SANITIZE_STTRING) ?? NULL;
+                $productId = filter_input(INPUT_GET, 'productId', FILTER_VALIDATE_INT) ?? NULL;
+                $qty = filter_input(INPUT_GET, 'qty', FILTER_VALIDATE_INT) ?? NULL;
+                $cartAction = filter_input(INPUT_GET, 'cartAction', FILTER_SANITIZE_STRING) ?? NULL;
                 switch($cartAction) {
                     case 'Add':
                         $inCart = false;
@@ -68,6 +67,8 @@
                         break;
                 }
 
+                var_dump($cart);
+
                 $_SESSION['cart'] = $cart;
 
                 session_write_close();
@@ -76,9 +77,17 @@
             <section id="content">
                 <h2>Your Cart</h2>
                 <?php
+                    $grossPrice = 0.00;
+
                     $doc = new DOMDocument();
                     foreach($cart as $line) {
                         $productInfo = getProductInfo($line['productId']);
+
+                        var_dump($productInfo['price']);
+                        var_dump($line['qty']);
+
+                        $grossPrice += $productInfo['price'] * $line['qty'];
+
                         if(!$productInfo['image']) $productInfo['image'] = "default.png";
 
                         $container = $doc->createElement("div");
@@ -130,7 +139,18 @@
                         $removeBtn->appendChild($removeLink);
                     }
                     echo $doc->saveHTML();
+                    var_dump($grossPrice);
                 ?>
+                <div class="formCenter">
+                    <p><strong>Sub-Total:</strong> $<?php echo $grossPrice; ?></p>
+                    <p>
+                        <strong>Total: </strong>
+                        $<?php
+                            $totalPrice = round($grossPrice + ($grossPrice * .07), 2);
+                            echo $totalPrice;
+                        ?>
+                    </p>
+                </div>
                 <div class="formCenter">
                     <button class="formBtn"><a href="?cartAction=Clear">Clear</a></button>
                     <button class="formBtn"><a href="?cartAction=Checkout">Checkout</a></button>

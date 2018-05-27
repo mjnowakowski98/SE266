@@ -17,7 +17,7 @@
 
             <section id="content">
                 <?php
-                    $productId = filter_input(INPUT_GET, 'productId', FILTER_VAILDIATE_INT) ?? NULL;
+                    $productId = filter_input(INPUT_GET, 'productId', FILTER_VALIDATE_INT) ?? NULL;
                     $product = getProductInfo($productId);
                     $product['description'] = NULL;
 

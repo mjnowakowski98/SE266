@@ -8,11 +8,10 @@ TODO:
 
     // UI
     ?? Display lowest catId first (remove all)
-    --Display err messages from auth head--
     Add product search (Cust/admin)
     Add product sort (Cust/admin)
-    Add total price to cart
-    Restrict order detail view to admin/current user
+    Add adjust qty to cart
+    Move total/tax to checkout case (cart)
     Support descriptions
     Add return to shopping link from cart
 
@@ -24,6 +23,8 @@ TODO:
 
     // Tables
     Add user address to userinfo
+    Add shipping date to orders
+    Add totalprice to orders
     Add price paid to orderitems
 
     // Misc

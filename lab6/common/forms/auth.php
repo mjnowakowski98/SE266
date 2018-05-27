@@ -1,4 +1,14 @@
 <?php
+    $msg = array();
+
+    $err = filter_input(INPUT_GET, 'err', FILTER_SANITIZE_STRING) ?? NULL;
+    if($err) {
+        $returnQS = 'action=signIn';
+        if($err === 'login_invalid') $msg[] = "Username or password is incorrect";
+
+        include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/msgbox.php");
+    }
+
     $email = $_SESSION['lastFormInfo']['email'] ?? NULL;
 ?>
 
