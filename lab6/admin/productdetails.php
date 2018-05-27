@@ -20,16 +20,17 @@
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
 
             <?php
-                $productId = $_REQUEST['productId'] ?? NULL;
+                $productId = filter_input(INPUT_GET, 'productId', FILTER_VALIDATE_INT) ??
+                    filter_input(INPUT_POST, 'productId', FILTER_VALIDATE_INT) ?? NULL;
 
-                $prodAction = $_POST['prodAction'] ?? NULL;
+                $prodAction = filter_input(INPUT_POST, 'prodAction', FILTER_SANITIZE_STRING) ?? NULL;
                 switch($prodAction) {
                     case 'Update':
-                        $newName = $_POST['prodName'] ?? NULL;
-                        $newPrice = $_POST['price'] ?? NULL;
+                        $newName = filter_input(INPUT_POST, 'prodName', FILTER_SANITIZE_STRING) ?? NULL;
+                        $newPrice = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT) ?? NULL;
                         //$newDesc = $_POST['description'];
-                        $newCatId = $_POST['catId'] ?? NULL;
-                        $newImage = $_POST['prevImage'];
+                        $newCatId = filter_input(INPUT_POST, 'catId', FILTER_VALIDATE_INT) ?? NULL;
+                        $newImage = filter_input(INPUT_POST, 'prevImage', FILTER_SANITIZE_STRING) ?? NULL;
 
                         $imageFile = $_FILES['image'] ?? NULL;
                         if($imageFile['size']) {

@@ -1,18 +1,18 @@
 <?php
     // Some debug functions
-    $stopExec = $_GET['debug'] ?? false;
+    $stopExec = filter_input(INPUT_GET, 'debug', FILTER_VALIDATE_BOOLEAN) ?? false;
 
     session_start();
     include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/master/dbfunctions.php");
 
     // Get sending page info
-    $prevPage = $_POST['prevPage'] ?? NULL;
-    $sender = $_POST['sender'] ?? NULL; // Name of form that sent request
+    $prevPage = filter_input(INPUT_POST, 'prevPage', FILTER_SANITIZE_STRING) ?? NULL;
+    $sender = filter_input(INPUT_POST, 'sender', FILTER_SANITIZE_STRING) ?? NULL; // Name of form that sent request
 
     // User info                        // Used by
-    $email = $_POST['email'] ?? NULL;   // signIn, signUp
-    $pass1 = $_POST['pass'] ?? NULL;    // signIn, signUp
-    $pass2 = $_POST['pass2'] ?? NULL;   // signUp
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING) ?? NULL;   // signIn, signUp
+    $pass1 = filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_STRING) ?? NULL;    // signIn, signUp
+    $pass2 = filter_input(INPUT_POST, 'pass2', FILTER_SANITIZE_STRING) ?? NULL;   // signUp
 
     // Validate passwords typed correct if signUp (hacky because no JS allowed)
     if($pass1 === $pass2) $passHash = password_hash($pass1, PASSWORD_DEFAULT);
@@ -22,8 +22,8 @@
     }
 
     // Extended sign up info
-    $fName = $_POST['fName'] ?? NULL; // First name
-    $lName = $_POST['lName'] ?? NULL; // Last Name
+    $fName = filter_input(INPUT_POST, 'fName', FILTER_SANITIZE_STRING) ?? NULL; // First name
+    $lName = filter_input(INPUT_POST, 'lName', FILTER_SANITIZE_STRING) ?? NULL; // Last Name
 
     $_SESSION['lastFormInfo'] = [ // Used to re-populate form data
         'email' => $email,
@@ -51,7 +51,7 @@
             break;
 
         case "adminSignUp":
-            $adminId = $_POST['employeeId'] ?? NULL; // Get EID from form
+            $adminId = filter_input(INPUT_POST, 'employeeId', FILTER_SANITIZE_STRING) ?? NULL; // Get EID from form
             if(verifyAdmin($adminId)) { // If valid employee
                 $userId = addUser($email, $passHash, $fName, $lName, $adminId); // Add admin user
                 updateAdminStatus($adminId, $userId); // Link user to admin table, disable registration

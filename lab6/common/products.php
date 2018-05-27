@@ -3,7 +3,7 @@
         <select name="catId">
             <option selected>All</option>>
             <?php
-                $catId = $_GET['catId'] ?? 'All';
+                $catId = filter_input(INPUT_GET, 'catId', FILTER_VALIDATE_INT) ?? 'All';
                 
                 $categories = getCategories();
                 $doc = new DOMDocument();

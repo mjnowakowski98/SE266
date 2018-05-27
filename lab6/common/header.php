@@ -1,6 +1,6 @@
 <?php
     // Setup page behavior
-    $action = $_GET['action'] ?? NULL;
+    $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING) ?? NULL;
     if(!$isAdminPage) $prevPage = $_SERVER['PHP_SELF'];
     else $prevPage = "/lab6/index.php";
 

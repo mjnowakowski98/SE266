@@ -24,6 +24,7 @@ TODO:
     Clean CSS/Page Formatting
     Change get/post vars to filter input
     Comment the everything
+    Move file upload handling to master/utils
 
     // Tables
     Add user address to userinfo

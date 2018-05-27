@@ -19,10 +19,10 @@
 
             <?php
                 $cart = $_SESSION['cart'] ?? array();
-                $productId = $_GET['productId'] ?? NULL;
-                $qty = $_GET['qty'] ?? NULL;
+                $productId = filter_input(INPUT_GET, 'productId', FILTER_VAILDIATE_INT) ?? NULL;
+                $qty = filter_input(INPUT_GET, 'qty', FILTER_VAILDIATE_INT) ?? NULL;
                 $qty = intval($qty);
-                $cartAction = $_GET['cartAction'] ?? NULL;
+                $cartAction = filter_input(INPUT_GET, 'cartAction', FILTER_SANITIZE_STTRING) ?? NULL;
                 switch($cartAction) {
                     case 'Add':
                         $inCart = false;

@@ -18,7 +18,7 @@
         
             <section id="content">
                 <?php
-                    $orderId = $_GET['orderId'] ?? NULL;
+                    $orderId = filter_input(INPUT_GET, 'orderId', INPUT_VALIDATE_INT) ?? NULL;
                     $orderInfo = getOrderLines($orderId);
 
                     $doc = new DOMDocument();

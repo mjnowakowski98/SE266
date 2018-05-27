@@ -22,10 +22,10 @@
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
 
             <?php
-                $prodAction = $_POST['prodAction'] ?? NULL;
-                $prodName = $_POST['prodName'] ?? NULL;
-                $price = $_POST['price'] ?? NULL;
-                $catId = $_POST['catId'] ?? NULL;
+                $prodAction = filter_input(INPUT_POST, 'prodAction', FILTER_SANITIZE_STRING) ?? NULL;
+                $prodName = filter_input(INPUT_POST, 'prodName', FILTER_SANITIZE_STRING) ?? NULL;
+                $price = filter_post(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT) ?? NULL;
+                $catId = filter_input(INPUT_POST, 'catId', FILTER_VALIDATE_INT) ?? NULL;
 
                 $imageFile = $_FILES['image'] ?? NULL;
                 if($imageFile['size']) {
