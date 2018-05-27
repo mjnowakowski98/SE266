@@ -16,6 +16,8 @@
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
 
             <?php
+                $msg = array();
+
                 $cart = $_SESSION['cart'] ?? array();
                 $productId = filter_input(INPUT_GET, 'productId', FILTER_VALIDATE_INT) ?? NULL;
                 $qty = filter_input(INPUT_GET, 'qty', FILTER_VALIDATE_INT) ?? NULL;
@@ -31,14 +33,16 @@
                             }
                         }
                         if(!$inCart) {
+                            $price = getProductInfo($productId)['price'];
                             $cart[] = [
                                 'productId' => $productId,
-                                'qty' => $qty
+                                'qty' => $qty,
+                                'price' => $price
                             ];
                         }
                         break;
 
-                    case 'Remove': // item2 named so because item causes issues, thanks php
+                    case 'Remove': // item2 named so because item causes issues, probably to do with one being a reference
                         $count = 0;
                         foreach($cart as $item2) {
                             if($item2['productId'] === $productId) {
@@ -55,7 +59,10 @@
                             include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/auth.php");
                             break;
                         }
-                        checkout($cart, $user);
+                        if($cart) {
+                            $count = checkout($cart, $user);
+                        }
+                        else $msg[] = "Error: Nothing to checkout";
                         $cart = array();
                         break;
 
@@ -63,14 +70,25 @@
                         $cart = array();
                         break;
 
+                    case 'updateQty':
+                        foreach($cart as &$item) {
+                            if($item['productId'] === $productId) {
+                                $newQty = filter_input(INPUT_GET, 'newQty', FILTER_VALIDATE_INT);
+                                if($newQty > 0) $item['qty'] = $newQty;
+                                else $item['qty'] = 1;
+                                $msg[] = "Successfully updated";
+                                break;
+                            }
+                        }
+                        break;
+
                     default:
                         break;
                 }
 
-                var_dump($cart);
+                if($msg) include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/forms/msgbox.php");
 
                 $_SESSION['cart'] = $cart;
-
                 session_write_close();
             ?>
 
@@ -82,9 +100,6 @@
                     $doc = new DOMDocument();
                     foreach($cart as $line) {
                         $productInfo = getProductInfo($line['productId']);
-
-                        var_dump($productInfo['price']);
-                        var_dump($line['qty']);
 
                         $grossPrice += $productInfo['price'] * $line['qty'];
 
@@ -114,9 +129,36 @@
                         $priceOut->appendChild($doc->createTextNode('$' . $productInfo['price']));
                         $rightDiv->appendChild($priceOut);
 
-                        $qtyOut = $doc->createElement("p");
-                        $qtyOut->appendChild($doc->createTextNode('Qty: ' . $line['qty']));
+                        $qtyOut = $doc->createElement("form");
+                        $qtyOut->setAttribute("action",'#');
+                        $qtyOut->setAttribute("method", "GET");
+                        $qtyOut->appendChild($doc->createTextNode('Qty: '));
                         $rightDiv->appendChild($qtyOut);
+
+                        $qtyAdjust = $doc->createElement("input");
+                        $qtyAdjust->setAttribute("class", "qtySelect");
+                        $qtyAdjust->setAttribute("type", "number");
+                        $qtyAdjust->setAttribute("name", "newQty");
+                        $qtyAdjust->setAttribute("value", $line['qty']);
+                        $qtyOut->appendChild($qtyAdjust);
+
+                        $qtyProduct = $doc->createElement("input");
+                        $qtyProduct->setAttribute("type", "hidden");
+                        $qtyProduct->setAttribute("name", "productId");
+                        $qtyProduct->setAttribute("value", $line['productId']);
+                        $qtyOut->appendChild($qtyProduct);
+
+                        $qtyAction = $doc->createElement("input");
+                        $qtyAction->setAttribute("type", "hidden");
+                        $qtyAction->setAttribute("name", "cartAction");
+                        $qtyAction->setAttribute("value", "updateQty");
+                        $qtyOut->appendChild($qtyAction);
+
+                        $qtySubmit = $doc->createElement("input");
+                        $qtySubmit->setAttribute("type", "submit");
+                        $qtyOut->appendChild($qtySubmit);
+
+                        $rightDiv->appendChild($doc->createElement("br"));
 
                         $detailBtn = $doc->createElement("button");
                         $detailBtn->setAttribute("class", "formBtn");
@@ -139,8 +181,8 @@
                         $removeBtn->appendChild($removeLink);
                     }
                     echo $doc->saveHTML();
-                    var_dump($grossPrice);
                 ?>
+
                 <div class="formCenter">
                     <p><strong>Sub-Total:</strong> $<?php echo $grossPrice; ?></p>
                     <p>

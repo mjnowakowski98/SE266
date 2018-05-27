@@ -5,9 +5,8 @@
     <head>
         <title>Trader Dan's</title>
         <meta charset="UTF-8">
-        <link href="/lab6/css/master.css" type="text/css" rel="stylesheet">
-        <link href="/lab6/css/formparts.css" type="text/css" rel="stylesheet">
-        <link href="/lab6/css/effects.css" type="text/css" rel="stylesheet">
+        
+        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/mastercsslinks.php"); ?>
         <link href="/lab6/css/displays.css" type="text/css" rel="stylesheet">
     </head>
     
@@ -17,8 +16,13 @@
             <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/lab6/common/header.php"); ?>
         
             <section id="content">
+                <div class="formCenter">
+                    <a href="/lab6/common/vieworders.php">Go back</a>
+                    <hr>
+                </div>
+                <h3>Order Items</h3>
                 <?php
-                    $orderId = filter_input(INPUT_GET, 'orderId', INPUT_VALIDATE_INT) ?? NULL;
+                    $orderId = filter_input(INPUT_GET, 'orderId', FILTER_VALIDATE_INT) ?? NULL;
                     $orderInfo = getOrderLines($orderId);
 
                     $doc = new DOMDocument();

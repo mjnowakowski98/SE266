@@ -164,7 +164,7 @@
         try {
             global $db;
 
-            $sql  = "INSERT INTO `orders` (user_id, date_created) ";
+            $sql  = "INSERT INTO `orders` (user_id, shipping_date) ";
             $sql .= "VALUES(:userId, NOW());";
 
             $stmt = $db->prepare($sql);
@@ -175,16 +175,15 @@
             $orderId = $db->lastInsertId();
 
             foreach($cart as $line) {
-                $sql  = "INSERT INTO `orderitems` (order_id, product_id, qty) ";
-                $sql .= "VALUES(:orderId, :productId, :qty);";
+                $sql  = "INSERT INTO `orderitems` (order_id, product_id, qty, price_paid) ";
+                $sql .= "VALUES(:orderId, :productId, :qty, :price);";
 
                 $stmt = $db->prepare($sql);
                 $stmt->bindParam(':orderId', $orderId);
                 $stmt->bindParam(':productId', $line['productId']);
                 $stmt->bindParam(':qty', $line['qty']);
+                $stmt->bindParam(':price', $line['price']);
                 $stmt->execute();
-
-                $stmt->debugDumpParams();
 
                 if(!$stmt->rowCount()) echo "Warning: failed to add item";
             }
@@ -199,7 +198,7 @@
             global $db;
 
             $sql  = "SELECT order_id, user_id ";
-            $sql .= "FROM orders`";
+            $sql .= "FROM `orders`";
             if($userId) $sql .= " WHERE user_id = :userId";
             $sql .= ';';
 
@@ -222,7 +221,7 @@
             $sql .= "WHERE order_id = :orderId;";
 
             $stmt = $db->prepare($sql);
-            $stmt->bindParam(':orderId', $orderId);
+            $stmt->bindParam(':orderId', $orderId, PDO::PARAM_INT);
             $stmt->execute();
 
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);

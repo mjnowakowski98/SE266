@@ -35,6 +35,11 @@ h4 {
 
     /*edit this on complete form*/
     margin-top:20px;
+    padding:2px;
+}
+
+.right .qtySelect {
+    width:25px;
 }
 
 .cartLine img {
