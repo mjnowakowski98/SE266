@@ -29,6 +29,7 @@
         $doc = new DOMDocument();
         foreach($productList as $product) {
             $displayLink = $doc->createElement("a");
+			$adminSender = $adminSender ?? NULL;
             if(!$adminSender)
                 $displayLink->setAttribute("href", "/lab6/productdetails.php?productId=" . $product['product_id']);
             else $displayLink->setAttribute("href", "/lab6/admin/productdetails.php?productId=" . $product['product_id']);
