@@ -52,6 +52,13 @@
         $doc->appendChild($index);
 
         $doc->appendChild($doc->createTextNode(' | '));
+		
+		$cart = $doc->createElement("a");
+        $cart->appendChild($doc->createTextNode("Your cart"));
+        $cart->setAttribute('href', "/lab6/cart.php");
+        $doc->appendChild($cart);
+        
+        $doc->appendChild($doc->createTextNode(' | '));
 
         if($_SERVER['QUERY_STRING'])
             $oldQS = '&' . $_SERVER['QUERY_STRING'];
@@ -65,15 +72,7 @@
                 $doc->appendChild($adminPage);
 
                 $doc->appendChild($doc->createTextNode(' | '));
-            } else {
-                $cart = $doc->createElement("a");
-                $cart->appendChild($doc->createTextNode("Your cart"));
-                $cart->setAttribute('href', "/lab6/cart.php");
-                $doc->appendChild($cart);
-
-                $doc->appendChild($doc->createTextNode(' | '));
             }
-
             $logout = $doc->createElement("a");
             $logout->appendChild($doc->createTextNode("Logout"));
             $logout->setAttribute("href", "?action=logout" . $oldQS);

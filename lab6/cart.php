@@ -63,8 +63,11 @@
                         }
 
                         // Display error if cart is empty
+						$count = 0;
                         if($cart) $count = checkout($cart, $user);
                         else $msg[] = "Error: Nothing to checkout";
+						
+						if($count) echo "Checkout successful: order processing would occur here";
 
                         $cart = array(); // Empty cart, payment details and shipping would go here on a real store
                         break;
