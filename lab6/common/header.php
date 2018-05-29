@@ -72,7 +72,14 @@
                 $doc->appendChild($adminPage);
 
                 $doc->appendChild($doc->createTextNode(' | '));
-            }
+            } else {
+				$viewOrders = $doc->createElement('a');
+				$viewOrders->appendChild($doc->createTextNode('Your orders'));
+				$viewOrders->setAttribute('href', "/lab6/common/viewOrders.php");
+				$doc->appendChild($viewOrders);
+				
+				$doc->appendChild($doc->createTextNode(' | '));
+			}
             $logout = $doc->createElement("a");
             $logout->appendChild($doc->createTextNode("Logout"));
             $logout->setAttribute("href", "?action=logout" . $oldQS);
