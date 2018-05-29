@@ -31,7 +31,7 @@
                     if(!$orders) echo "No orders to display";
 
                     $doc = new DOMDocument();
-                    foreach($orders as $order) {
+                    foreach($orders as $order) {						
                         $doc->appendChild($doc->createTextNode($order['order_id']));
                         $doc->appendChild($doc->CreateTextNode(" | "));
 
@@ -42,6 +42,10 @@
                         $doc->appendChild($orderName);
 
                         $doc->appendChild($doc->CreateTextNode(" | "));
+						
+						$orderDate = $doc->createElement("span");
+						$orderDate->appendChild($doc->createTextNode($order['shipping_date']));
+						$doc->appendChild($orderDate);
 
                         $doc->appendChild($doc->createElement('br'));
                     }

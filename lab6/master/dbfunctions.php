@@ -208,7 +208,7 @@
         try {
             global $db;
 
-            $sql  = "SELECT order_id, user_id ";
+            $sql  = "SELECT order_id, user_id, shipping_date ";
             $sql .= "FROM `orders`";
             if($userId) $sql .= " WHERE user_id = :userId";
             $sql .= ';';
